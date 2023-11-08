@@ -122,12 +122,92 @@ const Signup = () => {
 								) : (
 									<form onSubmit={handleSignupSubmit}>
 										<div className='mx-wrap'>
-											{/* Additional fields for sign up form */}
-											{/* ... (similar structure to your signup form) */}
+											<div className='w-full px-4'>
+												<label htmlFor='name' className='block text-sm font-medium text-body mb-3'>
+													Name
+												</label>
+												<input
+													type="text"
+													id="name"
+													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
+													placeholder="Name"
+													name='name'
+													required
+												/>
+											</div>
+											<div className='w-full px-4'>
+												<label htmlFor='age' className='block text-sm font-medium text-body mb-3'>
+													Age
+												</label>
+												<input
+													type="text"
+													id="age"
+													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
+													placeholder="Age"
+													name='age'
+													required
+												/>
+											</div>
+											<div className='w-full px-4'>
+												<label htmlFor='phonenumber' className='block text-sm font-medium text-body mb-3'>
+													Phone Number
+												</label>
+												<input
+													type="text"
+													id="phonenumber"
+													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
+													placeholder="Enter your phone number"
+													name='phonenumber'
+													required
+												/>
+											</div>
+											<div className='w-full px-4'>
+												<label htmlFor='gender' className='block text-sm font-medium text-body mb-3'>
+													Gender
+												</label>
+												<select
+													id="gender"
+													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
+													required
+												>
+													<option value="" disabled>
+													Select Gender
+													</option>
+													<option value="male">Male</option>
+													<option value="female">Female</option>
+													<option value="other">Other</option>
+												</select>
+											</div>
+											<div className='w-full px-4'>
+												<label htmlFor='signuppassword' className='block text-sm font-medium text-body mb-3'>
+													Password
+												</label>
+												<input
+													type="text"
+													id="signuppassword"
+													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
+													placeholder="Enter a strong password"
+													name='signuppassword'
+													required
+												/>
+											</div>
+											<div className='w-full px-4'>
+												<label htmlFor='confirmpassword' className='block text-sm font-medium text-body mb-3'>
+													Confirm Password
+												</label>
+												<input
+													type="text"
+													id="confirmpassword"
+													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
+													placeholder="Confirm your password"
+													name='confirmpassword'
+													required
+												/>
+											</div>
 										</div>
 										<div className='w-full px-4 grid place-items-center'>
-											<input type='submit' className='btn' value='Sign Up' name='submitbtn' />
-											<p onClick={() => setFormType('login')} className='text-blue-500 cursor-pointer'>
+											<input type='submit' className='btn mb-5' value='Sign Up' name='submitbtn' />
+											<p onClick={() => setFormType('login')} className='text-blue-500 cursor-pointer '>
 												Already have an account? Login
 											</p>
 										</div>
