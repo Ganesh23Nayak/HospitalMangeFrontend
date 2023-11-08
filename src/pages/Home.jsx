@@ -8,6 +8,7 @@ import ContactUs from '../views/ContactUs';
 import Footer from '../views/Footer';
 import {animateJS} from '../utils/utils';
 import {animateList} from '../configs/config';
+import Signup from '../views/Signup';
 
 const Home = () => {
 	useEffect(() => {
@@ -19,6 +20,7 @@ const Home = () => {
 			<Hero />
 			<Features />
 			<AboutUs />
+			<Signup />
 			<ContactUs />
 			<Footer />
 		</div>
