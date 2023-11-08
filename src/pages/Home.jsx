@@ -9,6 +9,7 @@ import Features from '../views/Features';
 import ContactUs from '../views/ContactUs';
 import Footer from '../views/Footer';
 import Signup from '../views/Signup';
+import {list_displays} from '../configs/config';
 
 const Home = () => {
 	useEffect(() => {
@@ -16,7 +17,7 @@ const Home = () => {
 	});
 	return (
 		<div>
-			<Header />
+			<Header list_displays={list_displays} />
 			<Hero />
 			<Features />
 			<AboutUs />

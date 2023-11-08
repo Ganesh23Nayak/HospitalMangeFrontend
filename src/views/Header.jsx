@@ -1,25 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {scrollIntoView} from '../../src/utils/utils';
-const Header = () => {
-	const list_displays = [
-		{
-			id: 'features',
-			name: 'Features',
-		},
-		{
-			id: 'about',
-			name: 'About',
-		},
-		{
-			id: 'signup',
-			name: 'SignUp',
-		},
-		{
-			id: 'contact',
-			name: 'Contact',
-		},
-	];
+import {Patirent_list} from '../configs/config';
 
+const Header = ({list_displays}) => {
 	const [isOnScroll, setOnScroll] = useState();
 
 	useEffect(() => {
@@ -147,6 +130,13 @@ const Link = ({id, name, toggleNavbar}) => (
 		onClick={() => {
 			scrollIntoView(id);
 			toggleNavbar();
+			if (Patirent_list) {
+				if (id === 'logout') {
+					console.log('logout');
+				} else {
+					console.log(id);
+				}
+			}
 		}}
 	>
 		<span className='menu-scroll text-base text-body font-medium group-hover:text-primary-600 group-dark:hover:text-primary-500 py-2 lg:py-6 lg:inline-flex lg:px-0 flex mx-8 lg:mr-0 cursor-pointer select-none'>
