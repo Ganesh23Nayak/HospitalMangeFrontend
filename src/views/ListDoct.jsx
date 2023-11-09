@@ -44,6 +44,7 @@ const ListDoct = () => {
 						<DocCards person={p} key={i} />
 					))}
 				</div>
+				
 			</div>
 			<div className='absolute top-5 right-0 z-[-1]'>
 				<SignupRight />

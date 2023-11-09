@@ -10,7 +10,7 @@ import {ToastContainer} from 'react-toastify';
 const Signup = () => {
 	const [formType, setFormType] = useState('login');
 	const [showPassword, setShowPassword] = useState(false);
-	const notify = () => toast('Wow so easy!');
+	const notify = () => toast.info('Signup Successful!');
 	const togglePassword = () => {
 		setShowPassword(!showPassword);
 	};
@@ -25,7 +25,7 @@ const Signup = () => {
 		formData.forEach((value, key) => {
 			data[key] = value;
 		});
-
+		{notify()}
 		console.log('Form Data:', data);
 
 		setTimeout(() => {
@@ -33,8 +33,8 @@ const Signup = () => {
 		}, 2000);
 
 		e.target.reset();
-
-		toast.error('Sorry, something went wrong. Please try again later.', toastEmitter);
+		setFormType('login');
+		// toast.error('Sorry, something went wrong. Please try again later.', toastEmitter);
 	};
 
 	const handleLoginSubmit = (e) => {
@@ -56,14 +56,14 @@ const Signup = () => {
 		}, 2000);
 
 		e.target.reset();
-
-		toast.error('Sorry, something went wrong. Please try again later.', toastEmitter);
+		
+		// toast.error('Sorry, something went wrong. Please try again later.', toastEmitter);
 	};
 
 	return (
 		<section id='signup' className='pt-[120px] pb-20 overflow-hidden relative'>
 			<div className='container'>
-				<div className='mx-wrap gap-y-10'>
+				<div className='mx-wrap gap-y-10 justify-center'>
 					<div className='w-full lg:w-8/12 px-4 shrink'>
 						<div className=' bg-screen shadow-contact rounded-md p-11 sm:p-[55px] lg:p-11 xl:p-[55px] fadeInUp-hidden shrink'>
 							<div className='h-full'>
@@ -113,8 +113,8 @@ const Signup = () => {
 											</div>
 										</div>
 										<div className='w-full px-4 grid place-items-center'>
-											<input type='submit' className='btn mb-5' value='Login' name='submitbtn' onClick={notify} />
-											<ToastContainer />
+											<input type='submit' className='btn mb-5' value='Login' name='submitbtn'   />
+											
 											<p onClick={() => setFormType('signup')} className='text-blue-500 cursor-pointer'>
 												Don't have an account? Sign Up
 											</p>
@@ -171,7 +171,7 @@ const Signup = () => {
 													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
 													required
 												>
-													<option className='dark:bg-[#1F305E]' value='' disabled>
+													<option className='dark:bg-[#1F305E]' value=''>
 														Select Gender
 													</option>
 													<option className='dark:bg-[#1F305E] text-white font-semibold' value='male'>
@@ -219,6 +219,7 @@ const Signup = () => {
 										</div>
 										<div className='w-full px-4 grid place-items-center'>
 											<input type='submit' className='btn mb-5' value='Sign Up' name='submitbtn' />
+											<ToastContainer />
 											<p onClick={() => setFormType('login')} className='text-blue-500 cursor-pointer '>
 												Already have an account? Login
 											</p>

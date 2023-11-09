@@ -3,8 +3,8 @@ import React from 'react';
 const DocCards = ({person}) => {
 	const {name, department, gender, phone, email} = person;
 	return (
-		<div className='w-full lg:w-1/2 px-4 fadeIn-hidden testimonial-card'>
-			<div className='card-gradient relative z-10 overflow-hidden rounded-lg p-8 lg:px-6 xl:px-8 mb-10 select-none cursor-pointer hover:outline hover:outline-offset-0 hover:outline-primary-800 dark:hover:outline-primary-100 transition-all'>
+		<div className='w-full lg:w-1/2 px-4 fadeIn-hidden testimonial-card '>
+			<div className='card-gradient relative z-10 overflow-hidden rounded-lg p-8 lg:px-6 xl:px-8 mb-10 select-none cursor-pointer hover:outline hover:outline-offset-0 hover:outline-primary-800 dark:hover:outline-primary-100 transition-all '>
 				<div className='sm:flex justify-between lg:block xl:flex'>
 					<div className='w-full flex items-center'>
 						<div className='w-full'>
@@ -13,7 +13,7 @@ const DocCards = ({person}) => {
 						</div>
 					</div>
 				</div>
-				<p className='text-lg font-medium text-sub leading-relaxed pt-8 mt-6 border-t border-primary-800 dark:border-primary-100'>
+				<p className='text-lg font-medium text-sub  leading-relaxed pt-8 mt-6 border-t border-primary-800 dark:border-primary-100'>
 					{gender}
 					{email}
 					{phone}

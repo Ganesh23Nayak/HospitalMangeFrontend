@@ -6,7 +6,7 @@ import ListDoct from '../views/ListDoct';
 import {Patirent_list} from '../configs/config';
 import Header from '../views/Header';
 import PatientDashBoar from '../views/PatientDashBoard';
-
+import DoctorTable from '../components/DoctorTable';
 const Patient = () => {
 	useEffect(() => {
 		animateList.map((animate) => animateJS(animate));
@@ -16,6 +16,7 @@ const Patient = () => {
 			<Header list_displays={Patirent_list} />
 
 			<ListDoct />
+			<DoctorTable/>
 			<PatientDashBoar />
 		</div>
 	);
