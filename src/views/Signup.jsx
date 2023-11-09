@@ -127,10 +127,10 @@ const Signup = () => {
 													Name
 												</label>
 												<input
-													type="text"
-													id="name"
-													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
-													placeholder="Name"
+													type='text'
+													id='name'
+													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
+													placeholder='Name'
 													name='name'
 													required
 												/>
@@ -140,10 +140,10 @@ const Signup = () => {
 													Age
 												</label>
 												<input
-													type="text"
-													id="age"
-													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
-													placeholder="Age"
+													type='text'
+													id='age'
+													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
+													placeholder='Age'
 													name='age'
 													required
 												/>
@@ -153,10 +153,10 @@ const Signup = () => {
 													Phone Number
 												</label>
 												<input
-													type="text"
-													id="phonenumber"
-													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
-													placeholder="Enter your phone number"
+													type='text'
+													id='phonenumber'
+													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
+													placeholder='Enter your phone number'
 													name='phonenumber'
 													required
 												/>
@@ -166,16 +166,16 @@ const Signup = () => {
 													Gender
 												</label>
 												<select
-													id="gender"
-													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
+													id='gender'
+													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
 													required
 												>
-													<option value="" disabled>
-													Select Gender
+													<option value='' disabled>
+														Select Gender
 													</option>
-													<option value="male">Male</option>
-													<option value="female">Female</option>
-													<option value="other">Other</option>
+													<option value='male'>Male</option>
+													<option value='female'>Female</option>
+													<option value='other'>Other</option>
 												</select>
 											</div>
 											<div className='w-full px-4'>
@@ -183,10 +183,10 @@ const Signup = () => {
 													Password
 												</label>
 												<input
-													type="text"
-													id="signuppassword"
-													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
-													placeholder="Enter a strong password"
+													type='text'
+													id='signuppassword'
+													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
+													placeholder='Enter a strong password'
 													name='signuppassword'
 													required
 												/>
@@ -196,10 +196,10 @@ const Signup = () => {
 													Confirm Password
 												</label>
 												<input
-													type="text"
-													id="confirmpassword"
-													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
-													placeholder="Confirm your password"
+													type='text'
+													id='confirmpassword'
+													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
+													placeholder='Confirm your password'
 													name='confirmpassword'
 													required
 												/>

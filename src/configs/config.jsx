@@ -50,3 +50,14 @@ export const Patirent_list = [
 		name: 'Logout',
 	},
 ];
+
+export const Admin_list = [
+	{
+		id: 'dashboard',
+		name: 'DashBoard',
+	},
+	{
+		id: 'logout',
+		name: 'Logout',
+	},
+];
