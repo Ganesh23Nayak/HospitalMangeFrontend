@@ -20,10 +20,10 @@ const Hero = () => {
               <div className="mx-auto max-w-[570px] text-center fadeIn-hidden">
                 <div>
                   <h1 className="text-body font-bold text-3xl sm:text-4xl md:text-5xl leading-tight sm:leading-tight md:leading-tight mb-5">
-                    Welcome
+                    Welcome to Medicare
                   </h1>
                   <p className="font-medium text-lg md:text-xl leading-relaxed md:leading-relaxed text-sub mb-12">
-                    This is an website used to book your appointments with us.
+                    This is a website used to book your appointments with us.
                   </p>
                 </div>
 

@@ -113,7 +113,7 @@ const Signup = () => {
 											</div>
 										</div>
 										<div className='w-full px-4 grid place-items-center'>
-											<input type='submit' className='btn' value='Login' name='submitbtn' />
+											<input type='submit' className='btn mb-5' value='Login' name='submitbtn' />
 											<p onClick={() => setFormType('signup')} className='text-blue-500 cursor-pointer'>
 												Don't have an account? Sign Up
 											</p>
@@ -124,7 +124,7 @@ const Signup = () => {
 										<div className='mx-wrap'>
 											<div className='w-full px-4'>
 												<label htmlFor='name' className='block text-sm font-medium text-body mb-3'>
-													Name
+													Full Name
 												</label>
 												<input
 													type="text"
@@ -170,12 +170,12 @@ const Signup = () => {
 													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
 													required
 												>
-													<option value="" disabled>
+													<option className='dark:bg-black' value="" disabled>
 													Select Gender
 													</option>
-													<option value="male">Male</option>
-													<option value="female">Female</option>
-													<option value="other">Other</option>
+													<option className='dark:bg-black text-white font-semibold'value="male">Male</option>
+													<option className='dark:bg-black text-white font-semibold' value="female">Female</option>
+													<option className='dark:bg-black text-white font-semibold' value="other">Other</option>
 												</select>
 											</div>
 											<div className='w-full px-4'>
@@ -190,6 +190,7 @@ const Signup = () => {
 													name='signuppassword'
 													required
 												/>
+												
 											</div>
 											<div className='w-full px-4'>
 												<label htmlFor='confirmpassword' className='block text-sm font-medium text-body mb-3'>
@@ -203,6 +204,7 @@ const Signup = () => {
 													name='confirmpassword'
 													required
 												/>
+
 											</div>
 										</div>
 										<div className='w-full px-4 grid place-items-center'>

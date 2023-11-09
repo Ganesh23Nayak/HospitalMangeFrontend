@@ -9,7 +9,7 @@ const Footer = () => {
 					<a href={tuanhngf} target='_blank' rel='noopener noreferrer'>
 						{/* <img src="/logo100.png" alt="tuanhngf.dev" className="w-8" /> */}
 					</a>
-					<p className='text-sub'>2023 © Startup. All rights reserved.</p>
+					<p className='text-sub text-3xl'>@MEDICARE</p>
 				</div>
 			</div>
 		</footer>
