@@ -5,8 +5,8 @@ import Patient from './pages/Patient';
 function App() {
 	return (
 		<>
-			{/* <Home /> */}
-			{/* <Patient /> */}
+			<Home />
+			{/* {/* <Patient /> */}
 			<Administrator />
 		</>
 	);
