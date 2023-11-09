@@ -6,11 +6,11 @@ import {useState} from 'react';
 import {toast} from 'react-toastify';
 import {toastEmitter} from '../configs/config';
 import ShowPassword from '../components/SVG/ShowPassword';
-
+import { ToastContainer } from 'react-toastify';
 const Signup = () => {
 	const [formType, setFormType] = useState('login');
 	const [showPassword, setShowPassword] = useState(false);
-
+	const notify = () => toast("Wow so easy!");
 	const togglePassword = () => {
 		setShowPassword(!showPassword);
 	};
@@ -35,6 +35,7 @@ const Signup = () => {
 		e.target.reset();
 
 		toast.error('Sorry, something went wrong. Please try again later.', toastEmitter);
+		
 	};
 
 	const handleLoginSubmit = (e) => {
@@ -62,8 +63,8 @@ const Signup = () => {
 
 	return (
 		<section id='signup' className='pt-[120px] pb-20 overflow-hidden relative'>
-			<div className='container'>
-				<div className='mx-wrap gap-y-10'>
+			<div className='container '>
+				<div className='mx-wrap gap-y-10 justify-center bg-transparent '>
 					<div className='w-full lg:w-8/12 px-4 shrink'>
 						<div className=' bg-screen shadow-contact rounded-md p-11 sm:p-[55px] lg:p-11 xl:p-[55px] fadeInUp-hidden shrink'>
 							<div className='h-full'>
@@ -113,7 +114,8 @@ const Signup = () => {
 											</div>
 										</div>
 										<div className='w-full px-4 grid place-items-center'>
-											<input type='submit' className='btn mb-5' value='Login' name='submitbtn' />
+											<input type='submit' className='btn mb-5' value='Login' name='submitbtn' onClick={notify} />
+											<ToastContainer />
 											<p onClick={() => setFormType('signup')} className='text-blue-500 cursor-pointer'>
 												Don't have an account? Sign Up
 											</p>
@@ -170,34 +172,39 @@ const Signup = () => {
 													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
 													required
 												>
-													<option className='dark:bg-black' value="" disabled>
+													<option className='dark:bg-[#1F305E]' value="" disabled>
 													Select Gender
 													</option>
-													<option className='dark:bg-black text-white font-semibold'value="male">Male</option>
-													<option className='dark:bg-black text-white font-semibold' value="female">Female</option>
-													<option className='dark:bg-black text-white font-semibold' value="other">Other</option>
+													<option className='dark:bg-[#1F305E] text-white font-semibold'value="male">Male</option>
+													<option className='dark:bg-[#1F305E] text-white font-semibold' value="female">Female</option>
+													<option className='dark:bg-[#1F305E] text-white font-semibold' value="other">Other</option>
 												</select>
 											</div>
 											<div className='w-full px-4'>
+												
 												<label htmlFor='signuppassword' className='block text-sm font-medium text-body mb-3'>
 													Password
 												</label>
+												<div className='relative'>
 												<input
-													type="text"
+													type={showPassword ? 'text' : 'password'}
 													id="signuppassword"
 													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
 													placeholder="Enter a strong password"
 													name='signuppassword'
 													required
 												/>
-												
+												<span onClick={togglePassword} className='absolute top-2 right-3 cursor-pointer'>
+															<ShowPassword />
+												</span>
+												</div>
 											</div>
 											<div className='w-full px-4'>
 												<label htmlFor='confirmpassword' className='block text-sm font-medium text-body mb-3'>
 													Confirm Password
 												</label>
 												<input
-													type="text"
+													type={showPassword ? 'text' : 'password'}
 													id="confirmpassword"
 													className="w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5"
 													placeholder="Confirm your password"
