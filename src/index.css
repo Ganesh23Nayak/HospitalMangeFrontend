@@ -1,0 +1,32 @@
+@import 'app.css';
+@import 'tailwind.css';
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #d0d4e7;
+	margin: -8px 0;
+	overflow: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #30395c;
+	border-radius: 8px;
+}
+
+@keyframes jump {
+    0%, 100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8,0,1,1);
+    }
+    50% {
+        transform: none;
+        animation-timing-function: cubic-bezier(0,0,0.2,1);
+    }
+}
+.animate-jump {
+    animation: jump 1s infinite;
+}
+

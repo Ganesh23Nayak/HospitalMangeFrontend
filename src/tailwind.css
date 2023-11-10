@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		@apply bg-primary-50 dark:bg-primary-950 transition duration-500;
+	}
+
+	::selection {
+		@apply bg-primary-800 text-primary-50 dark:bg-primary-100 dark:text-primary-900;
+	}
+}
+
+@layer components {
+	.container {
+		@apply w-full mx-auto px-4 sm:max-w-[540px] md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1140px] 2xl:max-w-[1320px];
+	}
+
+	.mx-wrap {
+		@apply flex flex-wrap -mx-4;
+	}
+
+	.bg-screen {
+		@apply bg-white dark:bg-[#131d35];
+	}
+
+	.text-body {
+		@apply text-[#131d35] dark:text-primary-50;
+	}
+
+	.text-sub {
+		@apply text-[#8a7f80] dark:text-[#d7d3d3] dark:text-opacity-80;
+	}
+
+	.border-sub {
+		@apply border-[#8a7f80] dark:border-[#d7d3d3];
+	}
+
+	.flex-center {
+		@apply flex items-center justify-center;
+	}
+
+	.btn {
+		@apply cursor-pointer select-none font-semibold bg-primary-800 text-primary-50 text-base py-4 px-8 rounded-md hover:bg-opacity-80 transition-colors duration-300 disabled:bg-gray-600 disabled:cursor-not-allowed;
+	}
+
+	.on-scroll {
+		@apply dark:bg-primary-800 dark:bg-opacity-40 backdrop-blur-sm bg-primary-50 bg-opacity-80 shadow-[inset_0_-1px_0_0_rgba(0,0,0,0.1)];
+	}
+
+	#features svg {
+		@apply group-hover:rotate-[360deg] transition duration-1000;
+	}
+}
