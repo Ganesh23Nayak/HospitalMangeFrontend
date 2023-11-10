@@ -2,6 +2,7 @@ import Administrator from './pages/Administrator';
 import Home from './pages/Home';
 import Patient from './pages/Patient';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+
 function App() {
 	return (
 		<>
