@@ -10,7 +10,7 @@ function App() {
 				<Route path="/" element={<Home />}/>
 				 <Route path="/Patient" element={<Patient />} />
 				 <Route path= "/Administrator" element={<Administrator />} />
-
+				{/* This is a test comment */}
 			</Routes>
 		</Router>
 		</>
