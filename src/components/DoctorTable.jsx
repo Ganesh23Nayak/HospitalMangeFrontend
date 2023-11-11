@@ -186,16 +186,16 @@ const DoctorTable = () => {
 								<td className='px-6 py-4 whitespace-nowrap dark:text-white'>{item.problem}</td>
 								<td className='px-6 py-4 whitespace-nowrap dark:text-white'>{item.date}</td>
 								<td className='px-6 py-4 whitespace-nowrap dark:text-white'>{item.time}</td>
-								<td onSet className='text-right px-6 whitespace-nowrap'>
+								<td className='text-right px-6 whitespace-nowrap'>
 									<a
-										href='javascript:void()'
+										href='/'
 										className='py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-green-200 rounded-lg'
 									>
 										ACCEPT
 									</a>
 									<button
 										onClick={() => handleDelete(idx)}
-										href='javascript:void()'
+										href='/'
 										className='py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-red-200 rounded-lg'
 									>
 										REJECT

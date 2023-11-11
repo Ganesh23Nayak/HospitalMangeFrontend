@@ -1,9 +1,15 @@
 import React from 'react';
 
-const DocCards = ({person}) => {
+const DocCards = ({person, onClick}) => {
+	const handleCardClick = () => {
+		if (onClick) {
+			onClick(person);
+		}
+		console.log('from card Clicked card ID:', name);
+	};
 	const {name, department, gender, phone, email} = person;
 	return (
-		<div className='w-full lg:w-1/2 px-4 fadeIn-hidden testimonial-card '>
+		<div className='w-full lg:w-1/2 px-4 fadeIn-hidden testimonial-card ' onClick={handleCardClick}>
 			<div className='card-gradient relative z-10 overflow-hidden rounded-lg p-8 lg:px-6 xl:px-8 mb-10 select-none cursor-pointer hover:outline hover:outline-offset-0 hover:outline-primary-800 dark:hover:outline-primary-100 transition-all '>
 				<div className='sm:flex justify-between lg:block xl:flex'>
 					<div className='w-full flex items-center'>
