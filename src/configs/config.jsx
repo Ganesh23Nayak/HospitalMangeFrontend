@@ -51,6 +51,17 @@ export const Patirent_list = [
 	},
 ];
 
+export const Doctor_list = [
+	{
+		id: 'dashboard',
+		name: 'DashBoard',
+	},
+	{
+		id: 'logout',
+		name: 'Logout',
+	},
+];
+
 export const Admin_list = [
 	{
 		id: 'dashboard',

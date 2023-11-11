@@ -33,9 +33,7 @@ const ContactUs = () => {
 					<div className='w-full lg:w-8/12 px-4 shrink'>
 						<div className=' bg-screen shadow-contact  rounded-md p-11 sm:p-[55px] lg:p-11 xl:p-[55px] fadeInUp-hidden shrink'>
 							<div className='h-full'>
-								<h2 className='font-bold text-body text-2xl sm:text-3xl lg:text-2xl xl:text-3xl mb-3'>
-									Need Help? Open a Ticket
-								</h2>
+								<h2 className='font-bold text-body text-2xl sm:text-3xl lg:text-2xl xl:text-3xl mb-3'>Need Help?</h2>
 								<p className='text-sub text-base font-medium mb-12'>
 									Our support team will get back to you ASAP via email.
 								</p>
@@ -118,9 +116,6 @@ const ContactUs = () => {
 										No spam guaranteed, So please don’t send any spam mail.
 									</p>
 								</form>
-								{/* <div className="absolute top-0 left-0 z-[-1]">
-                  <SubscribeSVG />
-                </div> */}
 							</div>
 						</div>
 					</div>

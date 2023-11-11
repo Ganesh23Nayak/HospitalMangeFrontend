@@ -1,8 +1,9 @@
 import Administrator from './pages/Administrator';
 import Home from './pages/Home';
 import Patient from './pages/Patient';
+import Doctor from './pages/Doctor';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-// hello
+
 function App() {
 	return (
 		<>
@@ -11,7 +12,7 @@ function App() {
 					<Route path='/' element={<Home />} />
 					<Route path='/Patient' element={<Patient />} />
 					<Route path='/Administrator' element={<Administrator />} />
-					{/* This is a test comment */}
+					<Route path='/Doctor' element={<Doctor />} />
 				</Routes>
 			</Router>
 		</>
