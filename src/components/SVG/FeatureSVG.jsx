@@ -19,7 +19,7 @@ export const FeatureSVG2 = () => (
 );
 
 export const FeatureSVG3 = () => (
-  <svg width={40} height={40} viewBox="0 0 40 40" className="fill-current svg">
+  <svg width={40} height={40} viewBox="0 0 40 40" className="fill-current svg ">
     <path
       opacity="0.5"
       d="M20 30C22.75 30 25 32.25 25 35C25 37.75 22.75 40 20 40C17.25 40 15 37.75 15 35C15 32.25 17.25 30 20 30ZM35 30C37.75 30 40 32.25 40 35C40 37.75 37.75 40 35 40C32.25 40 30 37.75 30 35C30 32.25 32.25 30 35 30ZM35 15C37.75 15 40 17.25 40 20C40 22.75 37.75 25 35 25C32.25 25 30 22.75 30 20C30 17.25 32.25 15 35 15Z"

@@ -8,8 +8,8 @@ const Headings = ({ title }) => {
           {title}
         </h2>
         <p className="text-sub text-base md:text-lg leading-relaxed md:leading-relaxed">
-          There are many variations of passages of Lorem Ipsum available but the
-          majority have suffered alteration in some form.
+        Our platform allows you to browse, select, and confirm appointments with ease.
+
         </p>
       </div>
     </div>

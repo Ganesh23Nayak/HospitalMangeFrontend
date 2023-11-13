@@ -23,14 +23,14 @@ const Hero = () => {
                     Welcome to Medicare
                   </h1>
                   <p className="font-medium text-lg md:text-xl leading-relaxed md:leading-relaxed text-sub mb-12">
-                    This is a website used to book your appointments with us.
+                    A place to book your appointments with the finest Doctors.
                   </p>
                 </div>
 
                 <div className="flex-center gap-6">
                   <span
                     className="btn"
-                    onClick={() => scrollIntoView("features")}
+                    onClick={() => scrollIntoView("signup")}
                   >
                     Get Started
                   </span>
@@ -52,9 +52,12 @@ const Hero = () => {
         <div className="absolute bottom-0 left-0 z-[-1]">
           <HeroSVGLeft />
         </div>
+        
       </section>
       <ScrollToTop inView={inView} />
+      
     </>
+    
   );
 };
 

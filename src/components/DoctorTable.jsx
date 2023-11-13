@@ -103,27 +103,7 @@ const DoctorTable = () => {
 				date: '2023-11-01',
 				time: '10 AM',
 			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
+			
 		],
 		second: [
 			// ... Table data for the second tab
@@ -148,8 +128,8 @@ const DoctorTable = () => {
 	};
 
 	return (
-		<div id='dashboard' className='w-full max-w-screen-lg mx-auto mt-8'>
-			<div className='flex mb-4 justify-center'>
+		<div id='dashboard' className='w-full max-w-screen-lg mx-auto mt-8 '>
+			<div className='flex mb-4 justify-center '>
 				<button
 					className={`px-4 py-2 rounded-tl-md ${
 						activeTab === 'first' ? 'bg-yellow-500 text-white' : 'bg-gray-300 text-gray-700'
@@ -168,8 +148,8 @@ const DoctorTable = () => {
 				</button>
 			</div>
 			<div style={{overflow: 'auto', height: '500px'}}>
-				<table className='w-full'>
-					<thead className='bg-gray-50 text-gray-600 font-medium border-b'>
+				<table className='w-full '>
+					<thead className='bg-gray-50 text-gray-600 font-medium border-b '>
 						<tr>
 							<th className='py-3 px-6'>Patient Name</th>
 							<th className='py-3 px-6'>Problem</th>
@@ -179,7 +159,7 @@ const DoctorTable = () => {
 						</tr>
 					</thead>
 
-					<tbody className='text-gray-600 divide-y justify-center'>
+					<tbody className='text-gray-600 divide-y justify-center '>
 						{tableData[activeTab].map((item, idx) => (
 							<tr className='text-center' key={idx}>
 								<td className='px-6 py-4 whitespace-nowrap dark:text-white'>{item.name}</td>
