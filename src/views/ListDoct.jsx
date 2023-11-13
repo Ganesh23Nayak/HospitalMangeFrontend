@@ -8,7 +8,7 @@ import Modal from '../components/Modal';
 
 const ListDoct = () => {
 	const [modalOpen, setModalOpen] = useState(false);
-	const [selectedPerson, setSelectedPerson] = useState(null);
+	const [selectedPerson, setSelectedPerson] = useState({});
 
 	const doctors = [
 		{
