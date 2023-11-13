@@ -3,11 +3,10 @@ import Headings from '../components/Headings';
 import Admincards from '../components/Admincards';
 import AdminView from './AdminView';
 import AddDoct from './AddDoct';
-
+import AddPatient from './AddPatient';
 const AdminDashBoard = () => {
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [showTable, setShowTable] = useState(false);
-
 	const list = [
 		{
 			category: 'admin',
@@ -47,24 +46,26 @@ const AdminDashBoard = () => {
 		console.log(showTable);
 	};
 
+
+
 	return (
 		<section id='dashboard' className='bg-screen pt-[45px]'>
 			<div className='container'>
 				<div className='mx-wrap'>
 					<Headings title={'Administrator Dashboard'} />
 				</div>
-				<div className='mx-wrap justify-center'>
+				<div className='mx-wrap flex text-center justify-center'>
 					{showTable ? (
 						<div>
-							<button onClick={handleBack}>Back</button>
+							<button onClick={handleBack} className='text-white rounded-full px-7 py-2 bg-primary-900'>Back</button>
 							{selectedCard === null ? (
 								list.map((item, i) => <Admincards info={item} key={i} onClick={() => handleCardClick(item.id)} />)
 							) : selectedCard === 'admin' ? (
-								<AdminView />
+								<AdminView /> 
 							) : selectedCard === 'doctor' ? (
 								<AddDoct />
 							) : (
-								selectedCard === 'patient' && <h1>Patient</h1>
+								selectedCard === 'patient' && <AddPatient />
 							)}
 						</div>
 					) : (

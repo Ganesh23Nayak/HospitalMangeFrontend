@@ -17,31 +17,25 @@ const AddDoct = () => {
 			name: 'Liam James',
 			age: 19,
 			gender: 'Male',
-			department: 'ENT',
+			doctor: 'Dr. John Doe',
 		},
 		{
-			name: 'Kritarth',
+			name: 'Test123',
 			age: 19,
 			gender: 'Male',
-			department: 'ENT',
+			doctor: 'Dr. Smith Doe',
 		},
 		{
-			name: 'Ganesh',
+			name: 'Liam James',
 			age: 19,
 			gender: 'Male',
-			department: 'ENT',
+			doctor: 'Dr. John Doe',
 		},
 		{
-			name: 'Test',
+			name: 'Liam James',
 			age: 19,
 			gender: 'Male',
-			department: 'ENT',
-		},
-		{
-			name: 'Jane Doe',
-			age: 19,
-			gender: 'Male',
-			department: 'ENT',
+			doctor: 'Dr. John Doe',
 		},
 	]);
 	const [isNotificationVisible, setIsNotificationVisible] = useState(false);
@@ -49,7 +43,7 @@ const AddDoct = () => {
 		name: '',
 		age: '',
 		gender: '',
-		department: '',
+		doctor: '',
 		// Add more form fields as needed
 	});
 	const [lastAddedData, setLastAddedData] = useState(null);
@@ -63,7 +57,7 @@ const AddDoct = () => {
 				name: '',
 				age: '',
 				gender: '',
-				department: '',
+				doctor: '',
 			});
 
 			setTimeout(() => {
@@ -87,15 +81,14 @@ const AddDoct = () => {
 		const updatedTableData = [...tableData];
 		updatedTableData.splice(index, 1);
 		setTableData(updatedTableData);
-		alert("Doctor removed successfully");
+		alert("Patient removed successfully");
 	}
-
 
 	return (
 		<div className='w-full max-w-screen-lg mx-auto mt-8'>
 			<div className='text-center mb-8'>
 				<button className='px-4 py-2 bg-blue-500 text-white rounded' onClick={() => setIsModalOpen(true)}>
-					Add Doctors
+				    Add Patients
 				</button>
 				{/* Modal */}
 				{isModalOpen && (
@@ -141,12 +134,12 @@ const AddDoct = () => {
 									/>
 								</label>
 								<label className='block mb-2'>
-									Department
+									Doctor
 									<input
 										type='text'
-										value={formData.department}
+										value={formData.doctor}
 										required
-										onChange={(e) => setFormData({...formData, department: e.target.value})}
+										onChange={(e) => setFormData({...formData, doctor: e.target.value})}
 										className='w-full px-3 py-2 border border-gray-300 rounded'
 									/>
 								</label>
@@ -174,7 +167,7 @@ const AddDoct = () => {
                             <th className="py-3 px-6">Name</th>
                             <th className="py-3 px-6">Age</th>
                             <th className="py-3 px-6">Gender</th>
-                            <th className="py-3 px-6">Department</th>
+                            <th className="py-3 px-6">Doctor</th>
                             <th className="py-3 px-6"></th>
                             
                         </tr>
@@ -186,8 +179,8 @@ const AddDoct = () => {
                                     <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{item.age}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{item.gender}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.department}</td>
-									<td><button className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center' onClick={() => handleRemove(idx)}>Remove</button></td>																					
+                                    <td className="px-6 py-4 whitespace-nowrap">{item.doctor}</td>
+									<td><button className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center' onClick={() => handleRemove(idx)}>Remove</button></td>
                                 </tr>
                             ))
                         }
