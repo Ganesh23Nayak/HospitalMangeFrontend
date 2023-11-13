@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 const Admincards = ({info, onClick}) => {
-	const {category, imgSrc, title, id} = info;
+	const {category, imgSrc, title, id ,tag} = info;
 
 	const handleCardClick = () => {
 		if (onClick) {
@@ -28,7 +28,7 @@ const Admincards = ({info, onClick}) => {
 							{title}
 						</h3>
 						<p className='text-base text-sub font-medium pb-6 mb-6 border-b border-sub border-opacity-10 dark:border-primary-50 dark:border-opacity-10'>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet dictum neque, laoreet dolor.
+							{tag}
 						</p>
 					</div>
 				</div>

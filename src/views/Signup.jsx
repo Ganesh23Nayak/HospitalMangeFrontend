@@ -10,7 +10,7 @@ import {ToastContainer} from 'react-toastify';
 const Signup = () => {
 	const [formType, setFormType] = useState('login');
 	const [showPassword, setShowPassword] = useState(false);
-	const notify = () => toast.info('Signup Successful!');
+	// const notify = () => toast.info('Signup Successful!');
 	const togglePassword = () => {
 		setShowPassword(!showPassword);
 	};
@@ -25,7 +25,7 @@ const Signup = () => {
 		formData.forEach((value, key) => {
 			data[key] = value;
 		});
-		{notify()}
+		// {notify()}
 		console.log('Form Data:', data);
 
 		setTimeout(() => {
@@ -61,12 +61,12 @@ const Signup = () => {
 	};
 
 	return (
-		<section id='signup' className='pt-[120px] pb-20 overflow-hidden relative'>
+		<section id='signup' className='pt-[120px] pb-20 overflow-hidden relative '>
 			<div className='container'>
-				<div className='mx-wrap gap-y-10 justify-center'>
+				<div className='mx-wrap gap-y-10 justify-center '>
 					<div className='w-full lg:w-8/12 px-4 shrink'>
-						<div className=' bg-screen shadow-contact rounded-md p-11 sm:p-[55px] lg:p-11 xl:p-[55px] fadeInUp-hidden shrink'>
-							<div className='h-full'>
+						<div className=' bg-screen shadow-contact rounded-md p-11 sm:p-[55px] lg:p-11 xl:p-[55px] fadeInUp-hidden shrink card-gradient'>
+							<div className='h-full '>
 								<h2 className='font-bold text-body text-2xl sm:text-3xl lg:text-2xl xl:text-3xl mb-3'>
 									{formType === 'login' ? 'Login' : 'Sign Up'}
 								</h2>
@@ -122,7 +122,7 @@ const Signup = () => {
 									</form>
 								) : (
 									<form onSubmit={handleSignupSubmit}>
-										<div className='mx-wrap'>
+										<div className='mx-wrap '>
 											<div className='w-full px-4'>
 												<label htmlFor='name' className='block text-sm font-medium text-body mb-3'>
 													Full Name
@@ -217,9 +217,9 @@ const Signup = () => {
 												/>
 											</div>
 										</div>
-										<div className='w-full px-4 grid place-items-center'>
+										<div className='w-full px-4 grid place-items-center '>
 											<input type='submit' className='btn mb-5' value='Sign Up' name='submitbtn' />
-											<ToastContainer />
+											
 											<p onClick={() => setFormType('login')} className='text-blue-500 cursor-pointer '>
 												Already have an account? Login
 											</p>
@@ -227,16 +227,18 @@ const Signup = () => {
 									</form>
 								)}
 							</div>
+							
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className='absolute top-5 right-0 z-[-1]'>
+			<div className='absolute top-5 right-0 z-[-1] '>
 				<SignupRight />
 			</div>
 			<div className='absolute left-0 bottom-5 z-[-1]'>
 				<SignupLeft />
 			</div>
+			
 		</section>
 	);
 };

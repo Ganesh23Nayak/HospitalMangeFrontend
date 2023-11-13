@@ -27,14 +27,14 @@ const ContactUs = () => {
 	};
 
 	return (
-		<section id='contact' className='pt-[120px] pb-20 overflow-hidden relative'>
-			<div className='container'>
-				<div className='mx-wrap gap-y-10'>
-					<div className='w-full lg:w-8/12 px-4 shrink'>
+		<section id='contact' className='pt-[120px] pb-20 overflow-hidden relative border-t border-white border-opacity-[.15] '>
+			<div className='container '>
+				<div className='mx-wrap gap-y-10 justify-center '>
+					<div className='w-full lg:w-8/12 px-4 shrink '>
 						<div className=' bg-screen shadow-contact  rounded-md p-11 sm:p-[55px] lg:p-11 xl:p-[55px] fadeInUp-hidden shrink'>
-							<div className='h-full'>
-								<h2 className='font-bold text-body text-2xl sm:text-3xl lg:text-2xl xl:text-3xl mb-3'>Need Help?</h2>
-								<p className='text-sub text-base font-medium mb-12'>
+							<div className='h-full '>
+								<h2 className='font-bold text-body text-2xl sm:text-3xl lg:text-2xl xl:text-3xl mb-3 text-center'>Contact Us</h2>
+								<p className='text-sub text-base font-medium mb-12 text-center '>
 									Our support team will get back to you ASAP via email.
 								</p>
 								<form onSubmit={(e) => handleSubmit(e)}>
@@ -82,14 +82,14 @@ const ContactUs = () => {
 											</div>
 										</div>
 										<div className='w-full px-4 grid place-items-center'>
-											<input type='submit' className='btn' name='submitBtn' value='Submit Ticket' />
+											<input type='submit' className='btn' name='submitBtn' value='Submit' />
 										</div>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
-					<div className='w-full lg:w-4/12 px-4 shrink'>
+					{/* <div className='w-full lg:w-4/12 px-4 shrink'>
 						<div className='relative z-10 rounded-md card-gradient p-8 sm:p-11 lg:p-8 xl:p-11 h-full fadeInUp-hidden'>
 							<div>
 								<h3 className='text-body font-bold text-2xl leading-tight mb-4'>Subscribe to receive future updates</h3>
@@ -118,10 +118,10 @@ const ContactUs = () => {
 								</form>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
-			<div className='absolute left-0 bottom-36 z-[-1]'>
+			<div className=' absolute left-0 bottom-36 z-[-1]'>
 				<ContactSVGLeft />
 			</div>
 			<div className='absolute right-0 top-24 z-[-1]'>

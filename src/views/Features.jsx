@@ -21,10 +21,10 @@ const Features = () => {
 	return (
 		<section id='features' className='bg-screen pt-[120px] pb-[50px]'>
 			<div className='container'>
-				<div className='mx-wrap'>
+				<div className='mx-wrap '>
 					<Heading title={'Main Features'} />
 				</div>
-				<div className='mx-wrap gap-y-20'>
+				<div className='mx-wrap gap-y-20 mx-auto max-w-[1000px] text-center '>
 					{featuresList.map((f, i) => (
 						<FeatureCard info={f} key={i} />
 					))}

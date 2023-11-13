@@ -34,12 +34,12 @@ const ListDoct = () => {
 				<div className='mx-wrap'>
 					<Headings title={'Book Appointments'} />
 					<div className='w-full px-4'>
-						<div className='mx-auto max-w-[700px] text-center mb-[100px] fadeInLeft-hidden'>
-							<h3 className='text-body font-bold text-3xl sm:text-4xl md:text-[45px] mb-4'>Find the best doctors</h3>
+						<div className='mx-auto max-w-[700px] text-center mb-[100px] fadeIn-hidden'>
+							<h4 className='text-body font-bold text-1xl sm:text-4xl md:text-[45px] mb-4'>Find the best doctors</h4>
 						</div>
 					</div>
 				</div>
-				<div className='flex flex-wrap justify-center mx-[-16px]'>
+				<div className='flex flex-wrap justify-center mx-[-16px] '>
 					{doctors.map((p, i) => (
 						<DocCards person={p} key={i} />
 					))}

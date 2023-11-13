@@ -16,7 +16,6 @@ const Patient = () => {
 			<Header list_displays={Patirent_list} />
 
 			<ListDoct />
-			<DoctorTable/>
 			<PatientDashBoar />
 		</div>
 	);
