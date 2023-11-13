@@ -13,14 +13,14 @@ const ListDoct = () => {
 	const doctors = [
 		{
 			name: 'Roseanne Park',
-			department: 'ENC',
+			department: 'ENT',
 			gender: 'Male',
 			phone: '(123) 456-7890',
 			email: '@roseannepark.com',
 		},
 		{
-			name: 'Kritarth Singh',
-			department: 'Dematologist',
+			name: 'Kritarth',
+			department: 'Dermatologist',
 			gender: 'Male',
 			phone: '(123) 456-7890',
 			email: '@roseannepark.com',
@@ -31,6 +31,13 @@ const ListDoct = () => {
 			gender: 'Male',
 			phone: '(123) 456-7890',
 			email: '@roseannepark.com',
+		},
+		{
+			name: 'Jane Doe',
+			department: 'General Surgeon',
+			gender: 'Female',
+			phone: '(123) 456-7890',
+			email: '@janedoe.com',
 		},
 	];
 
@@ -55,7 +62,7 @@ const ListDoct = () => {
 					<Headings title={'Book Appointments'} />
 					<div className='w-full px-4'>
 						<div className='mx-auto max-w-[700px] text-center mb-[100px] fadeIn-hidden'>
-							<h4 className='text-body font-bold text-1xl sm:text-4xl md:text-[45px] mb-4'>Find the best doctors</h4>
+							<h4 className='text-body font-bold text-1xl sm:text-4xl md:text-[45px] mb-4'>Choose the best doctors</h4>
 						</div>
 					</div>
 				</div>
