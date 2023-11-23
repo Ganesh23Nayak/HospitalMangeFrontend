@@ -13,19 +13,32 @@ const AdminView = () => {
 	);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [tableData, setTableData] = useState([
-		{
-			name: 'Liam James',
-			age: 19,
-			gender: 'Male',
-			department: 'ENT',
-		},
+			{
+				name: 'Liam James',
+				age: 19,
+				gender: 'Male',
+			},
+			{
+				name: 'Kritarth',
+				age: 19,
+				gender: 'Male',
+			},
+			{
+				name: 'Ganesh',
+				age: 19,
+				gender: 'Male',
+			},
+			{
+				name: 'Test',
+				age: 19,
+				gender: 'Male',
+			},
 	]);
 	const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 	const [formData, setFormData] = useState({
 		name: '',
 		age: '',
 		gender: '',
-		department: '',
 		// Add more form fields as needed
 	});
 	const [lastAddedData, setLastAddedData] = useState(null);
@@ -58,8 +71,15 @@ const AdminView = () => {
 		}
 	};
 
+	const handleRemove=(index)=>{
+		const updatedTableData = [...tableData];
+		updatedTableData.splice(index, 1);
+		setTableData(updatedTableData);
+		alert("Admin removed successfully");
+	}
+
 	return (
-		<div className='w-full max-w-screen-lg mx-auto mt-8'>
+		<div className='w-full max-w-screen-lg mx-auto mt-8 '>
 			<div className='text-center mb-8'>
 				<button className='px-4 py-2 bg-blue-500 text-white rounded' onClick={() => setIsModalOpen(true)}>
 					Add Admins
@@ -124,26 +144,43 @@ const AdminView = () => {
 					</div>
 				)}
 			</div>
-			<div className='w-full max-h-30 overflow-y-auto'>
-				<table className='w-full  '>
-					<thead className='bg-gray-50 text-gray-600 font-medium border-b'>
-						<tr>
-							<th className='py-3 px-6'>Name</th>
-							<th className='py-3 px-6'>age</th>
-							<th className='py-3 px-6'>Gender</th>
-						</tr>
-					</thead>
-					<tbody>
-						{tableData.map((item, idx) => (
-							<tr key={idx}>
-								<td className='px-6 py-4 whitespace-nowrap'>{item.name}</td>
-								<td className='px-6 py-4 whitespace-nowrap'>{item.age}</td>
-								<td className='px-6 py-4 whitespace-nowrap'>{item.gender}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
+			<div className="mt- shadow-sm border rounded-lg overflow-x-auto " >
+                <table className="w-full table-fixed  text-xl text-center card-gradient">
+                    <thead className="bg-gray-50 text-gray-600 font-medium border-b">
+                        <tr>
+                            <th className="py-3 px-6">Name</th>
+                            <th className="py-3 px-6">Age</th>
+                            <th className="py-3 px-6">Gender</th>
+                            <th className="py-3 px-6"></th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody className="dark:text-white divide-y">
+                        {
+                           tableData.map((item, idx) => (
+                                <tr key={idx}>
+                                    <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{item.age}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{item.gender}</td>
+									<td><button className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center' onClick={() => handleRemove(idx)}>Remove</button></td>
+									
+								</tr>
+                            ))
+                        }
+						{isNotificationVisible && (
+										<div className='bg-green-500 text-white p-4 fixed bottom-0 right-0 m-4 rounded'>
+											<p>Admin removed!</p>
+											<button onClick={handleUndoClick} className='ml-4'>
+												Undo
+											</button>
+										</div>
+									)}
+                    </tbody>
+					
+                </table>
+				
+            </div>
 		</div>
 	);
 };
