@@ -7,6 +7,7 @@ import {toast} from 'react-toastify';
 import {toastEmitter} from '../configs/config';
 import ShowPassword from '../components/SVG/ShowPassword';
 import {ToastContainer} from 'react-toastify';
+import { Axios } from 'axios';
 const Signup = () => {
 	const [formType, setFormType] = useState('login');
 	const [showPassword, setShowPassword] = useState(false);
