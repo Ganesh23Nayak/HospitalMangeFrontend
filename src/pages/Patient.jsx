@@ -6,15 +6,18 @@ import ListDoct from '../views/ListDoct';
 import {Patirent_list} from '../configs/config';
 import Header from '../views/Header';
 import PatientDashBoard from '../views/PatientDashBoard';
-import DoctorTable from '../components/DoctorTable';
+
 const Patient = () => {
+	const userid = localStorage.getItem('user');
+	console.log('pai', userid);
+	localStorage.clear();
+	console.log(userid);
 	useEffect(() => {
 		animateList.map((animate) => animateJS(animate));
 	});
 	return (
 		<div>
 			<Header list_displays={Patirent_list} />
-
 			<ListDoct />
 			<PatientDashBoard />
 		</div>

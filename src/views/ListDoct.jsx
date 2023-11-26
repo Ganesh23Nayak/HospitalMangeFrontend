@@ -5,6 +5,7 @@ import SignupRight from '../components/SVG/SignupRight';
 import DocCards from '../components/DocCards';
 import Headings from '../components/Headings';
 import Modal from '../components/Modal';
+import Axios from 'axios';
 
 const ListDoct = () => {
 	const [modalOpen, setModalOpen] = useState(false);
@@ -53,6 +54,29 @@ const ListDoct = () => {
 
 	const handleModalSubmit = (formData) => {
 		console.log('Form submitted:', formData);
+		data = {
+			patientId: formData.patientId,
+			doctorId: formData.doctorId,
+			status: 'SCHEDULED',
+			appointment_date: formData.date,
+			appointment_time: formData.time,
+		};
+		Axios.post('http://localhost:3000/addAppointment', data, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+			.then((response) => {
+				if (response.data) {
+					console.log(response.data);
+					alert('Appointment Booked Successfully');
+				}
+			})
+			.catch((error) => {
+				// Handle any errors
+				alert('failed to book appointment. Please try again later.');
+				console.error('Error:', error);
+			});
 	};
 
 	return (

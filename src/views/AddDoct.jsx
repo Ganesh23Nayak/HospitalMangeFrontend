@@ -83,13 +83,12 @@ const AddDoct = () => {
 		}
 	};
 
-	const handleRemove=(index)=>{
+	const handleRemove = (index) => {
 		const updatedTableData = [...tableData];
 		updatedTableData.splice(index, 1);
 		setTableData(updatedTableData);
-		alert("Doctor removed successfully");
-	}
-
+		alert('Doctor removed successfully');
+	};
 
 	return (
 		<div className='w-full max-w-screen-lg mx-auto mt-8'>
@@ -150,6 +149,26 @@ const AddDoct = () => {
 										className='w-full px-3 py-2 border border-gray-300 rounded'
 									/>
 								</label>
+								<label className='block mb-2'>
+									Email
+									<input
+										type='email'
+										value={formData.email}
+										required
+										onChange={(e) => setFormData({...formData, email: e.target.value})}
+										className='w-full px-3 py-2 border border-gray-300 rounded'
+									/>
+								</label>
+								<label className='block mb-2'>
+									Password
+									<input
+										type='password'
+										value={formData.password}
+										required
+										onChange={(e) => setFormData({...formData, password: e.target.value})}
+										className='w-full px-3 py-2 border border-gray-300 rounded'
+									/>
+								</label>
 								<button type='button' onClick={handleModalSubmit} className='px-4 py-2 bg-blue-500 text-white rounded'>
 									Submit
 								</button>
@@ -167,33 +186,37 @@ const AddDoct = () => {
 					</div>
 				)}
 			</div>
-			<div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
-                <table className="w-full table-fixed  text-xl text-center card-gradient">
-                    <thead className="bg-gray-50 text-gray-600 font-medium border-b">
-                        <tr>
-                            <th className="py-3 px-6">Name</th>
-                            <th className="py-3 px-6">Age</th>
-                            <th className="py-3 px-6">Gender</th>
-                            <th className="py-3 px-6">Department</th>
-                            <th className="py-3 px-6"></th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody className="dark:text-white divide-y">
-                        {
-                           tableData.map((item, idx) => (
-                                <tr key={idx}>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.age}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.gender}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.department}</td>
-									<td><button className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center' onClick={() => handleRemove(idx)}>Remove</button></td>																					
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-            </div>
+			<div className='mt-12 shadow-sm border rounded-lg overflow-x-auto'>
+				<table className='w-full table-fixed  text-xl text-center card-gradient'>
+					<thead className='bg-gray-50 text-gray-600 font-medium border-b'>
+						<tr>
+							<th className='py-3 px-6'>Name</th>
+							<th className='py-3 px-6'>Age</th>
+							<th className='py-3 px-6'>Gender</th>
+							<th className='py-3 px-6'>Department</th>
+							<th className='py-3 px-6'></th>
+						</tr>
+					</thead>
+					<tbody className='dark:text-white divide-y'>
+						{tableData.map((item, idx) => (
+							<tr key={idx}>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.name}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.age}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.gender}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.department}</td>
+								<td>
+									<button
+										className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center'
+										onClick={() => handleRemove(idx)}
+									>
+										Remove
+									</button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 };
