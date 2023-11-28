@@ -25,7 +25,7 @@ const Modal = ({person, isOpen, onClose, onSubmit}) => {
 	};
 
 	return (
-		<div className={`modal fixed inset-0 flex items-center justify-center ${isOpen ? 'block' : 'hidden'}`}>
+		<div className={`modal fixed inset-0 flex items-center justify-center z-50 ${isOpen ? 'block' : 'hidden'}`}>
 			<div className='modal-overlay absolute w-full h-full bg-gray-900 opacity-50'></div>
 			<div className='modal-container bg-white dark:bg-gray-800 w-96 rounded-lg shadow-lg z-10 overflow-hidden'>
 				<span className='modal-close cursor-pointer text-3xl text-gray-500' onClick={onClose}>
