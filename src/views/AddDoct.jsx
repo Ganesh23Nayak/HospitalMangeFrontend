@@ -1,6 +1,23 @@
 import React, {useState} from 'react';
+import {useEffect} from 'react';
+import Axios from 'axios'; // Don't forget to import Axios
 
-const AddDoct = () => {
+const AddDoctor = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [tableData, setTableData] = useState([]);
+	const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+	const [formData, setFormData] = useState({
+		name: '',
+		age: '',
+		sex: '',
+		specialization: '',
+		email: '',
+		password: '',
+		phone_number: '',
+		role: 'DOCTOR',
+	});
+	const [lastAddedData, setLastAddedData] = useState(null);
+
 	const CloseIcon = () => (
 		<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' className='h-6 w-6'>
 			<path
@@ -11,59 +28,69 @@ const AddDoct = () => {
 			/>
 		</svg>
 	);
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [tableData, setTableData] = useState([
-		{
-			name: 'Liam James',
-			age: 19,
-			gender: 'Male',
-			department: 'ENT',
-		},
-		{
-			name: 'Kritarth',
-			age: 19,
-			gender: 'Male',
-			department: 'ENT',
-		},
-		{
-			name: 'Ganesh',
-			age: 19,
-			gender: 'Male',
-			department: 'ENT',
-		},
-		{
-			name: 'Test',
-			age: 19,
-			gender: 'Male',
-			department: 'ENT',
-		},
-		{
-			name: 'Jane Doe',
-			age: 19,
-			gender: 'Male',
-			department: 'ENT',
-		},
-	]);
-	const [isNotificationVisible, setIsNotificationVisible] = useState(false);
-	const [formData, setFormData] = useState({
-		name: '',
-		age: '',
-		gender: '',
-		department: '',
-		// Add more form fields as needed
-	});
-	const [lastAddedData, setLastAddedData] = useState(null);
+	useEffect(() => {
+		// Fetch data from the database on component mount
+		fetchDataFromDatabase();
+	}, []);
+
+	const fetchDataFromDatabase = () => {
+		Axios.post('http://localhost:3000/getdoctor')
+			.then((response) => {
+				if (response.data) {
+					const formattedData = response.data.doctors.map((doctor) => ({
+						id: doctor.id,
+						name: doctor.name,
+						email: doctor.email,
+						sex: doctor.sex,
+						phone_number: doctor.phone_number,
+						specialization: doctor.doctor.length > 0 ? doctor.doctor[0].specialization : 'N/A',
+					}));
+
+					setTableData(formattedData);
+				}
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+			});
+	};
 	const handleModalSubmit = () => {
-		if (formData.name && formData.age && formData.gender) {
-			setTableData([...tableData, formData]);
-			setLastAddedData(formData);
-			setIsModalOpen(false);
-			setIsNotificationVisible(true);
+		if (formData.name && formData.age && formData.sex && formData.email && formData.password && formData.phone_number) {
+			// Use spread syntax to create a copy of formData
+			const data = {...formData};
+
+			console.log('Form Data:', data);
+
+			// Assuming you have a backend endpoint to handle the post request
+			Axios.post('http://localhost:3000/addUser', data, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+				.then((response) => {
+					if (response.data) {
+						alert('Doctor Added Successfully');
+						console.log('Successful');
+						setTableData([...tableData, data]);
+						setLastAddedData(data);
+						setIsModalOpen(false);
+						setIsNotificationVisible(true);
+					}
+				})
+				.catch((error) => {
+					// Handle any errors
+					alert('Failed to Add Doctor');
+					console.error('Error:', error);
+				});
+
 			setFormData({
 				name: '',
 				age: '',
-				gender: '',
-				department: '',
+				sex: '',
+				specialization: '',
+				email: '',
+				password: '',
+				phone_number: '',
+				role: 'DOCTOR',
 			});
 
 			setTimeout(() => {
@@ -76,20 +103,47 @@ const AddDoct = () => {
 
 	const handleUndoClick = () => {
 		if (lastAddedData) {
-			const updatedTableData = tableData.filter((item) => item !== lastAddedData);
-			setTableData(updatedTableData);
-			setIsNotificationVisible(false);
-			setLastAddedData(null);
+			Axios.delete(`http://localhost:3000/removeDoctor/${lastAddedData.id}`)
+				.then((response) => {
+					if (response.data) {
+						alert('Doctor removed successfully');
+						const updatedTableData = tableData.filter((item) => item.id !== lastAddedData.id);
+						setTableData(updatedTableData);
+						setIsNotificationVisible(false);
+						setLastAddedData(null);
+					}
+				})
+				.catch((error) => {
+					console.error('Error removing doctor:', error);
+					alert('Failed to remove doctor');
+				});
 		}
 	};
 
-	const handleRemove=(index)=>{
-		const updatedTableData = [...tableData];
-		updatedTableData.splice(index, 1);
-		setTableData(updatedTableData);
-		alert("Doctor removed successfully");
-	}
+	// const handleRemove = (index) => {
+	// 	const updatedTableData = [...tableData];
+	// 	updatedTableData.splice(index, 1);
+	// 	setTableData(updatedTableData);
+	// 	alert('Doctor removed successfully');
+	// };
 
+	const handleRemove = (email, index) => {
+		console.log(email, index);
+		Axios.delete(`http://localhost:3000/removeDoctor/${email}`)
+			.then((response) => {
+				if (response.data.success) {
+					alert('Doctor removed successfully');
+					const updatedTableData = tableData.filter((item) => item.email !== email);
+					setTableData(updatedTableData);
+				} else {
+					alert('Failed to remove doctor');
+				}
+			})
+			.catch((error) => {
+				console.error('Error removing doctor:', error);
+				alert('Failed to remove doctor');
+			});
+	};
 
 	return (
 		<div className='w-full max-w-screen-lg mx-auto mt-8'>
@@ -109,13 +163,13 @@ const AddDoct = () => {
 							</button>
 							<h2 className='text-2xl font-bold mb-4'>Add Doctors</h2>
 							<form>
-								{/* Input fields for time, date, doctor name, department */}
+								{/* Input fields for time, date, doctor name, specialization */}
 								<label className='block mb-2'>
 									Name
 									<input
 										type='text'
 										value={formData.name}
-										required // Set the initial value to the form data
+										required
 										onChange={(e) => setFormData({...formData, name: e.target.value})}
 										className='w-full px-3 py-2 border border-gray-300 rounded'
 									/>
@@ -123,7 +177,7 @@ const AddDoct = () => {
 								<label className='block mb-2'>
 									Age
 									<input
-										type='integer'
+										type='number'
 										value={formData.age}
 										required
 										onChange={(e) => setFormData({...formData, age: e.target.value})}
@@ -131,22 +185,52 @@ const AddDoct = () => {
 									/>
 								</label>
 								<label className='block mb-2'>
-									Gender
+									Sex
 									<input
 										type='text'
-										value={formData.gender}
+										value={formData.sex}
 										required
-										onChange={(e) => setFormData({...formData, gender: e.target.value})}
+										onChange={(e) => setFormData({...formData, sex: e.target.value})}
 										className='w-full px-3 py-2 border border-gray-300 rounded'
 									/>
 								</label>
 								<label className='block mb-2'>
-									Department
+									specialization
 									<input
 										type='text'
-										value={formData.department}
+										value={formData.specialization}
 										required
-										onChange={(e) => setFormData({...formData, department: e.target.value})}
+										onChange={(e) => setFormData({...formData, specialization: e.target.value})}
+										className='w-full px-3 py-2 border border-gray-300 rounded'
+									/>
+								</label>
+								<label className='block mb-2'>
+									Email
+									<input
+										type='email'
+										value={formData.email}
+										required
+										onChange={(e) => setFormData({...formData, email: e.target.value})}
+										className='w-full px-3 py-2 border border-gray-300 rounded'
+									/>
+								</label>
+								<label className='block mb-2'>
+									Password
+									<input
+										type='password'
+										value={formData.password}
+										required
+										onChange={(e) => setFormData({...formData, password: e.target.value})}
+										className='w-full px-3 py-2 border border-gray-300 rounded'
+									/>
+								</label>
+								<label className='block mb-2'>
+									Phone Number
+									<input
+										type='tel'
+										value={formData.phone_number}
+										required
+										onChange={(e) => setFormData({...formData, phone_number: e.target.value})}
 										className='w-full px-3 py-2 border border-gray-300 rounded'
 									/>
 								</label>
@@ -160,42 +244,48 @@ const AddDoct = () => {
 				{/* Notification */}
 				{isNotificationVisible && (
 					<div className='bg-green-500 text-white p-4 fixed bottom-0 right-0 m-4 rounded'>
-						<p>Appointment booked!</p>
+						<p>Doctor added!</p>
 						<button onClick={handleUndoClick} className='ml-4'>
 							Undo
 						</button>
 					</div>
 				)}
 			</div>
-			<div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
-                <table className="w-full table-fixed  text-xl text-center card-gradient">
-                    <thead className="bg-gray-50 text-gray-600 font-medium border-b">
-                        <tr>
-                            <th className="py-3 px-6">Name</th>
-                            <th className="py-3 px-6">Age</th>
-                            <th className="py-3 px-6">Gender</th>
-                            <th className="py-3 px-6">Department</th>
-                            <th className="py-3 px-6"></th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody className="dark:text-white divide-y">
-                        {
-                           tableData.map((item, idx) => (
-                                <tr key={idx}>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.age}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.gender}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.department}</td>
-									<td><button className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center' onClick={() => handleRemove(idx)}>Remove</button></td>																					
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-            </div>
+			<div className='mt-12 shadow-sm border rounded-lg overflow-x-auto'>
+				<table className='w-full table-fixed text-xl text-center card-gradient'>
+					<thead className='bg-gray-50 text-gray-600 font-medium border-b'>
+						<tr>
+							<th className='py-3 px-6'>Name</th>
+							<th className='py-3 px-6'>Age</th>
+							<th className='py-3 px-6'>Sex</th>
+							<th className='py-3 px-6'>specialization</th>
+							<th className='py-3 px-6'>Phone Number</th>
+							<th className='py-3 px-6'></th>
+						</tr>
+					</thead>
+					<tbody className='dark:text-white divide-y'>
+						{tableData.map((item, idx) => (
+							<tr key={idx}>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.name}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.age}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.sex}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.specialization}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.phone_number}</td>
+								<td>
+									<button
+										className='px-4 py-2 hover:bg-red-500 dark:text-white rounded justify-center'
+										onClick={() => handleRemove(item.email, idx)}
+									>
+										Remove
+									</button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 };
 
-export default AddDoct;
+export default AddDoctor;

@@ -13,26 +13,26 @@ const AdminView = () => {
 	);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [tableData, setTableData] = useState([
-			{
-				name: 'Liam James',
-				age: 19,
-				gender: 'Male',
-			},
-			{
-				name: 'Kritarth',
-				age: 19,
-				gender: 'Male',
-			},
-			{
-				name: 'Ganesh',
-				age: 19,
-				gender: 'Male',
-			},
-			{
-				name: 'Test',
-				age: 19,
-				gender: 'Male',
-			},
+		{
+			name: 'Liam James',
+			age: 19,
+			gender: 'Male',
+		},
+		{
+			name: 'Kritarth',
+			age: 19,
+			gender: 'Male',
+		},
+		{
+			name: 'Ganesh',
+			age: 19,
+			gender: 'Male',
+		},
+		{
+			name: 'Test',
+			age: 19,
+			gender: 'Male',
+		},
 	]);
 	const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 	const [formData, setFormData] = useState({
@@ -71,12 +71,12 @@ const AdminView = () => {
 		}
 	};
 
-	const handleRemove=(index)=>{
+	const handleRemove = (index) => {
 		const updatedTableData = [...tableData];
 		updatedTableData.splice(index, 1);
 		setTableData(updatedTableData);
-		alert("Admin removed successfully");
-	}
+		alert('Admin removed successfully');
+	};
 
 	return (
 		<div className='w-full max-w-screen-lg mx-auto mt-8 '>
@@ -94,7 +94,7 @@ const AdminView = () => {
 							>
 								<CloseIcon />
 							</button>
-							<h2 className='text-2xl font-bold mb-4'>Add Doctors</h2>
+							<h2 className='text-2xl font-bold mb-4'>Add Admins</h2>
 							<form>
 								{/* Input fields for time, date, doctor name, department */}
 								<label className='block mb-2'>
@@ -127,6 +127,26 @@ const AdminView = () => {
 										className='w-full px-3 py-2 border border-gray-300 rounded'
 									/>
 								</label>
+								<label className='block mb-2'>
+									Email
+									<input
+										type='email'
+										value={formData.email}
+										required
+										onChange={(e) => setFormData({...formData, email: e.target.value})}
+										className='w-full px-3 py-2 border border-gray-300 rounded'
+									/>
+								</label>
+								<label className='block mb-2'>
+									Password
+									<input
+										type='password'
+										value={formData.password}
+										required
+										onChange={(e) => setFormData({...formData, password: e.target.value})}
+										className='w-full px-3 py-2 border border-gray-300 rounded'
+									/>
+								</label>
 								<button type='button' onClick={handleModalSubmit} className='px-4 py-2 bg-blue-500 text-white rounded'>
 									Submit
 								</button>
@@ -144,43 +164,43 @@ const AdminView = () => {
 					</div>
 				)}
 			</div>
-			<div className="mt- shadow-sm border rounded-lg overflow-x-auto " >
-                <table className="w-full table-fixed  text-xl text-center card-gradient">
-                    <thead className="bg-gray-50 text-gray-600 font-medium border-b">
-                        <tr>
-                            <th className="py-3 px-6">Name</th>
-                            <th className="py-3 px-6">Age</th>
-                            <th className="py-3 px-6">Gender</th>
-                            <th className="py-3 px-6"></th>
-                            
-                            
-                        </tr>
-                    </thead>
-                    <tbody className="dark:text-white divide-y">
-                        {
-                           tableData.map((item, idx) => (
-                                <tr key={idx}>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.age}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item.gender}</td>
-									<td><button className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center' onClick={() => handleRemove(idx)}>Remove</button></td>
-									
-								</tr>
-                            ))
-                        }
+			<div className='mt- shadow-sm border rounded-lg overflow-x-auto '>
+				<table className='w-full table-fixed  text-xl text-center card-gradient'>
+					<thead className='bg-gray-50 text-gray-600 font-medium border-b'>
+						<tr>
+							<th className='py-3 px-6'>Name</th>
+							<th className='py-3 px-6'>Age</th>
+							<th className='py-3 px-6'>Gender</th>
+							<th className='py-3 px-6'></th>
+						</tr>
+					</thead>
+					<tbody className='dark:text-white divide-y'>
+						{tableData.map((item, idx) => (
+							<tr key={idx}>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.name}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.age}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.gender}</td>
+								<td>
+									<button
+										className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center'
+										onClick={() => handleRemove(idx)}
+									>
+										Remove
+									</button>
+								</td>
+							</tr>
+						))}
 						{isNotificationVisible && (
-										<div className='bg-green-500 text-white p-4 fixed bottom-0 right-0 m-4 rounded'>
-											<p>Admin removed!</p>
-											<button onClick={handleUndoClick} className='ml-4'>
-												Undo
-											</button>
-										</div>
-									)}
-                    </tbody>
-					
-                </table>
-				
-            </div>
+							<div className='bg-green-500 text-white p-4 fixed bottom-0 right-0 m-4 rounded'>
+								<p>Admin removed!</p>
+								<button onClick={handleUndoClick} className='ml-4'>
+									Undo
+								</button>
+							</div>
+						)}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 };

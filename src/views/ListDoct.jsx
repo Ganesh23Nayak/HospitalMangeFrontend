@@ -5,41 +5,35 @@ import SignupRight from '../components/SVG/SignupRight';
 import DocCards from '../components/DocCards';
 import Headings from '../components/Headings';
 import Modal from '../components/Modal';
+import Axios from 'axios';
+import {useEffect} from 'react';
 
 const ListDoct = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [selectedPerson, setSelectedPerson] = useState({});
+	const [doctors, setDoctors] = useState([]);
 
-	const doctors = [
-		{
-			name: 'Roseanne Park',
-			department: 'ENT',
-			gender: 'Male',
-			phone: '(123) 456-7890',
-			email: '@roseannepark.com',
-		},
-		{
-			name: 'Kritarth',
-			department: 'Dermatologist',
-			gender: 'Male',
-			phone: '(123) 456-7890',
-			email: '@roseannepark.com',
-		},
-		{
-			name: 'Shreeraksha',
-			department: 'Cardiologist',
-			gender: 'Male',
-			phone: '(123) 456-7890',
-			email: '@roseannepark.com',
-		},
-		{
-			name: 'Jane Doe',
-			department: 'General Surgeon',
-			gender: 'Female',
-			phone: '(123) 456-7890',
-			email: '@janedoe.com',
-		},
-	];
+	useEffect(() => {
+		Axios.post('http://localhost:3000/getdoctor')
+			.then((response) => {
+				// console.log(response.data.doctors);
+				const formattedDoctors = response.data.doctors.map((doctor) => {
+					return {
+						doctorId: doctor.id,
+						name: doctor.name,
+						department: doctor.doctor[0]?.specialization || '', // Assuming there is always one specialization
+						gender: doctor.sex,
+						phone: doctor.phone_number,
+						email: doctor.email,
+					};
+				});
+
+				setDoctors(formattedDoctors);
+			})
+			.catch((error) => {
+				console.error('Error fetching doctors:', error);
+			});
+	}, []);
 
 	const handleCardClick = (person) => {
 		console.log('from main', person);
@@ -53,7 +47,32 @@ const ListDoct = () => {
 
 	const handleModalSubmit = (formData) => {
 		console.log('Form submitted:', formData);
+		data = {
+			patientId: formData.patientId,
+			doctorId: formData.doctorId,
+			status: 'SCHEDULED',
+			appointment_date: formData.date,
+			appointment_time: formData.time,
+		};
+		Axios.post('http://localhost:3000/addAppointment', data, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+			.then((response) => {
+				if (response.data) {
+					console.log(response.data);
+					alert('Appointment Booked Successfully');
+				}
+			})
+			.catch((error) => {
+				// Handle any errors
+				alert('failed to book appointment. Please try again later.');
+				console.error('Error:', error);
+			});
 	};
+
+	console.log(doctors);
 
 	return (
 		<section id='bookappointments' className='relative z-10 pt-[120px] pb-20 bg-screen'>

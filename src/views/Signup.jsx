@@ -82,6 +82,10 @@ const Signup = () => {
 			.then((response) => {
 				if (response.data) {
 					console.log('Login Successful');
+					localStorage.setItem('user', response.data.user.id);
+					// console.log(response.data.user.id);
+					// console.log(response.data.user);
+					console.log(localStorage.getItem('user'));
 					if (response.data.user.role === 'PATIENT') {
 						navigate('/Patient');
 					} else if (response.data.user.role === 'DOCTOR') {
