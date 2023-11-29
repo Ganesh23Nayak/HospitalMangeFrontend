@@ -4,14 +4,14 @@ const Modal = ({person, isOpen, onClose, onSubmit}) => {
 	const [description, setDescription] = useState('');
 	const [date, setDate] = useState('');
 	const [time, setTime] = useState('');
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const charcount = description.length;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const el = e.target.elements.submitbtn;
-		console.log(el);
-		el.disabled = true;
+
+		setIsSubmitting(true);
 
 		const formData = new FormData(e.target);
 		const data = {};
@@ -19,9 +19,12 @@ const Modal = ({person, isOpen, onClose, onSubmit}) => {
 			data[key] = value;
 		});
 		onSubmit({person, ...data, description});
-		alert('Appointment booked successfully');
-
-		onClose();
+		setTimeout(() => {
+			// Re-enable the submit button after a short delay
+			setIsSubmitting(false);
+			alert('Appointment booked successfully');
+			onClose(); // Close the modal after successful submission
+		}, 1000);
 	};
 
 	return (

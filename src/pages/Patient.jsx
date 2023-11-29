@@ -9,8 +9,7 @@ import PatientDashBoard from '../views/PatientDashBoard';
 
 const Patient = () => {
 	const userid = localStorage.getItem('user');
-	console.log('pai', userid);
-	localStorage.clear();
+	console.log('user:', userid);
 	console.log(userid);
 	useEffect(() => {
 		animateList.map((animate) => animateJS(animate));
@@ -18,7 +17,7 @@ const Patient = () => {
 	return (
 		<div>
 			<Header list_displays={Patirent_list} />
-			<ListDoct />
+			<ListDoct userid={userid} />
 			<PatientDashBoard />
 		</div>
 	);

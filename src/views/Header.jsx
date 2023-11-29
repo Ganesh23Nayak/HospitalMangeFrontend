@@ -137,6 +137,8 @@ const Link = ({id, name, toggleNavbar}) => {
 				toggleNavbar();
 				if (id === 'logout') {
 					console.log('logout');
+
+					localStorage.clear();
 					navigate('/');
 				} else {
 					console.log(id);
