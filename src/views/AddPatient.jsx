@@ -1,175 +1,55 @@
-import React, {useState} from 'react';
-
+import React, {useState, useEffect} from 'react';
+import Axios from 'axios';
 const AddDoct = () => {
-	const CloseIcon = () => (
-		<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' className='h-6 w-6'>
-			<path
-				fillRule='evenodd'
-				clipRule='evenodd'
-				d='M6.70711 7.29289C6.31658 6.90237 5.68342 6.90237 5.29289 7.29289C4.90237 7.68342 4.90237 8.31658 5.29289 8.70711L10.5858 14L5.29289 19.2929C4.90237 19.6834 4.90237 20.3166 5.29289 20.7071C5.68342 21.0976 6.31658 21.0976 6.70711 20.7071L12 15.4142L17.2929 20.7071C17.6834 21.0976 18.3166 21.0976 18.7071 20.7071C19.0976 20.3166 19.0976 19.6834 18.7071 19.2929L13.4142 14L18.7071 8.70711C19.0976 8.31658 19.0976 7.68342 18.7071 7.29289C18.3166 6.90237 17.6834 6.90237 17.2929 7.29289L12 12.5858L6.70711 7.29289Z'
-				fill='currentColor'
-			/>
-		</svg>
-	);
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [tableData, setTableData] = useState([
-		{
-			name: 'Liam James',
-			age: 19,
-			gender: 'Male',
-			doctor: 'Dr. John Doe',
-		},
-		{
-			name: 'Test123',
-			age: 19,
-			gender: 'Male',
-			doctor: 'Dr. Smith Doe',
-		},
-		{
-			name: 'Liam James',
-			age: 19,
-			gender: 'Male',
-			doctor: 'Dr. John Doe',
-		},
-		{
-			name: 'Liam James',
-			age: 19,
-			gender: 'Male',
-			doctor: 'Dr. John Doe',
-		},
-	]);
+	const [tableData, setTableData] = useState([]);
 	const [isNotificationVisible, setIsNotificationVisible] = useState(false);
-	const [formData, setFormData] = useState({
-		name: '',
-		age: '',
-		gender: '',
-		doctor: '',
-		// Add more form fields as needed
-	});
-	const [lastAddedData, setLastAddedData] = useState(null);
-	const handleModalSubmit = () => {
-		if (formData.name && formData.age && formData.gender) {
-			setTableData([...tableData, formData]);
-			setLastAddedData(formData);
-			setIsModalOpen(false);
-			setIsNotificationVisible(true);
-			setFormData({
-				name: '',
-				age: '',
-				gender: '',
-				doctor: '',
+	useEffect(() => {
+		// Fetch data from the backend on component mount
+		fetchDataFromBackend();
+	}, []);
+
+	const fetchDataFromBackend = () => {
+		Axios.post('http://localhost:3000/getpatient') // Adjust the endpoint as per your backend API
+			.then((response) => {
+				if (response.data) {
+					const formattedData = response.data.patients.map((patient) => ({
+						id: patient.id,
+						name: patient.name,
+						age: patient.age,
+						email: patient.email,
+						sex: patient.sex,
+						phone_number: patient.phone_number,
+					}));
+
+					setTableData(formattedData);
+				}
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
 			});
-
-			setTimeout(() => {
-				setIsNotificationVisible(false);
-			}, 10000);
-		} else {
-			alert('Please fill in all required fields.');
-		}
 	};
 
-	const handleUndoClick = () => {
-		if (lastAddedData) {
-			const updatedTableData = tableData.filter((item) => item !== lastAddedData);
-			setTableData(updatedTableData);
-			setIsNotificationVisible(false);
-			setLastAddedData(null);
-		}
-	};
-
-	const handleRemove = (index) => {
-		const updatedTableData = [...tableData];
-		updatedTableData.splice(index, 1);
-		setTableData(updatedTableData);
-		alert('Patient removed successfully');
+	const handleRemove = (email, index) => {
+		console.log(email, index);
+		Axios.delete(`http://localhost:3000/removeusr/${email}`)
+			.then((response) => {
+				if (response.data.success) {
+					alert('Patient removed successfully');
+					const updatedTableData = tableData.filter((item) => item.email !== email);
+					setTableData(updatedTableData);
+				} else {
+					alert('Failed to remove patient');
+				}
+			})
+			.catch((error) => {
+				console.error('Error removing patient:', error);
+				alert('Failed to remove patient');
+			});
 	};
 
 	return (
 		<div className='w-full max-w-screen-lg mx-auto mt-8'>
 			<div className='text-center mb-8'>
-				<button className='px-4 py-2 bg-blue-500 text-white rounded' onClick={() => setIsModalOpen(true)}>
-					Add Patients
-				</button>
-				{/* Modal */}
-				{isModalOpen && (
-					<div className='fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center'>
-						<div className='bg-white p-8 rounded-lg'>
-							<button
-								onClick={() => setIsModalOpen(false)}
-								className='absolute right-4 top-24 text-white hover:text-gray-800'
-							>
-								<CloseIcon />
-							</button>
-							<h2 className='text-2xl font-bold mb-4'>Add Doctors</h2>
-							<form>
-								{/* Input fields for time, date, doctor name, department */}
-								<label className='block mb-2'>
-									Name
-									<input
-										type='text'
-										value={formData.name}
-										required // Set the initial value to the form data
-										onChange={(e) => setFormData({...formData, name: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
-									/>
-								</label>
-								<label className='block mb-2'>
-									Age
-									<input
-										type='integer'
-										value={formData.age}
-										required
-										onChange={(e) => setFormData({...formData, age: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
-									/>
-								</label>
-								<label className='block mb-2'>
-									Gender
-									<input
-										type='text'
-										value={formData.gender}
-										required
-										onChange={(e) => setFormData({...formData, gender: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
-									/>
-								</label>
-								<label className='block mb-2'>
-									Doctor
-									<input
-										type='text'
-										value={formData.doctor}
-										required
-										onChange={(e) => setFormData({...formData, doctor: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
-									/>
-								</label>
-								<label className='block mb-2'>
-									Email
-									<input
-										type='email'
-										value={formData.email}
-										required
-										onChange={(e) => setFormData({...formData, email: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
-									/>
-								</label>
-								<label className='block mb-2'>
-									Password
-									<input
-										type='password'
-										value={formData.password}
-										required
-										onChange={(e) => setFormData({...formData, password: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
-									/>
-								</label>
-								<button type='button' onClick={handleModalSubmit} className='px-4 py-2 bg-blue-500 text-white rounded'>
-									Submit
-								</button>
-							</form>
-						</div>
-					</div>
-				)}
 				{/* Notification */}
 				{isNotificationVisible && (
 					<div className='bg-green-500 text-white p-4 fixed bottom-0 right-0 m-4 rounded'>
@@ -187,7 +67,7 @@ const AddDoct = () => {
 							<th className='py-3 px-6'>Name</th>
 							<th className='py-3 px-6'>Age</th>
 							<th className='py-3 px-6'>Gender</th>
-							<th className='py-3 px-6'>Doctor</th>
+							<th className='py-3 px-6'>Password</th>
 							<th className='py-3 px-6'></th>
 						</tr>
 					</thead>
@@ -196,12 +76,12 @@ const AddDoct = () => {
 							<tr key={idx}>
 								<td className='px-6 py-4 whitespace-nowrap'>{item.name}</td>
 								<td className='px-6 py-4 whitespace-nowrap'>{item.age}</td>
-								<td className='px-6 py-4 whitespace-nowrap'>{item.gender}</td>
-								<td className='px-6 py-4 whitespace-nowrap'>{item.doctor}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.sex}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.phone_number}</td>
 								<td>
 									<button
-										className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center'
-										onClick={() => handleRemove(idx)}
+										className='px-4 py-2 hover:bg-red-500 dark:text-white rounded justify-center'
+										onClick={() => handleRemove(item.email, idx)}
 									>
 										Remove
 									</button>

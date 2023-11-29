@@ -8,7 +8,7 @@ import Modal from '../components/Modal';
 import Axios from 'axios';
 import {useEffect} from 'react';
 
-const ListDoct = () => {
+const ListDoct = (userid) => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [selectedPerson, setSelectedPerson] = useState({});
 	const [doctors, setDoctors] = useState([]);
@@ -47,13 +47,17 @@ const ListDoct = () => {
 
 	const handleModalSubmit = (formData) => {
 		console.log('Form submitted:', formData);
-		data = {
-			patientId: formData.patientId,
-			doctorId: formData.doctorId,
-			status: 'SCHEDULED',
-			appointment_date: formData.date,
-			appointment_time: formData.time,
+		const id = parseInt(userid.userid);
+		console.log(id);
+		const data = {
+			patientId: id,
+			doctorId: formData.person.doctorId,
+			appointment_date: new Date(formData.date + 'T' + formData.time).toISOString(),
+			appointment_time: new Date(formData.date + 'T' + formData.time).toISOString(),
 		};
+
+		console.log(data);
+
 		Axios.post('http://localhost:3000/addAppointment', data, {
 			headers: {
 				'Content-Type': 'application/json',

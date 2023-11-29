@@ -40,6 +40,7 @@ const AddDoctor = () => {
 					const formattedData = response.data.doctors.map((doctor) => ({
 						id: doctor.id,
 						name: doctor.name,
+						age: doctor.age,
 						email: doctor.email,
 						age:doctor.age,
 						sex: doctor.sex,
@@ -130,7 +131,7 @@ const AddDoctor = () => {
 
 	const handleRemove = (email, index) => {
 		console.log(email, index);
-		Axios.delete(`http://localhost:3000/removeDoctor/${email}`)
+		Axios.delete(`http://localhost:3000/removeusr/${email}`)
 			.then((response) => {
 				if (response.data.success) {
 					alert('Doctor removed successfully');
