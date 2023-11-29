@@ -41,6 +41,7 @@ const AddDoctor = () => {
 						id: doctor.id,
 						name: doctor.name,
 						email: doctor.email,
+						age:doctor.age,
 						sex: doctor.sex,
 						phone_number: doctor.phone_number,
 						specialization: doctor.doctor.length > 0 ? doctor.doctor[0].specialization : 'N/A',
@@ -162,81 +163,110 @@ const AddDoctor = () => {
 								<CloseIcon />
 							</button>
 							<h2 className='text-2xl font-bold mb-4'>Add Doctors</h2>
-							<form>
+							<form className=' w-full max-w-screen-md mx-auto gap-4 container mx-wrap '>
 								{/* Input fields for time, date, doctor name, specialization */}
-								<label className='block mb-2'>
+								<div>
+								<label className='block mb-2 w-full px-4'>
 									Name
 									<input
 										type='text'
 										value={formData.name}
 										required
 										onChange={(e) => setFormData({...formData, name: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='flex px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<label className='block mb-2'>
+								</div>
+								<div >
+								<label className='block mb-2 w-full px-4'>
 									Age
 									<input
-										type='number'
+										type='numeric'
 										value={formData.age}
 										required
 										onChange={(e) => setFormData({...formData, age: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='flex w-full px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<label className='block mb-2'>
-									Sex
-									<input
-										type='text'
-										value={formData.sex}
-										required
-										onChange={(e) => setFormData({...formData, sex: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
-									/>
-								</label>
-								<label className='block mb-2'>
-									specialization
+								</div>
+								<div>
+												<label htmlFor='gender' className='block text-sm font-medium text-gray-700 mb-1 w-full px-5'>
+													Gender
+												</label>
+												<select
+													id='gender'
+													value={formData.sex}
+													onChange={(e) => setFormData({...formData, sex: e.target.value})}
+													className='flex w-full px-3 py-2.5 border border-gray-700 rounded'
+													required
+												>
+													<option className='font-semibold' value=''>
+														Select Gender
+													</option>
+													<option className='font-semibold' value='male'>
+														Male
+													</option>
+													<option className=' font-semibold' value='female'>
+														Female
+													</option>
+													<option className='font-semibold' value='other'>
+														Other
+													</option>
+												</select>
+											</div>
+								<div className='w-4/7'>
+								<label className='block mb-2 w-full px-4'>
+									Specialization
 									<input
 										type='text'
 										value={formData.specialization}
 										required
 										onChange={(e) => setFormData({...formData, specialization: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='flex w-full px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<label className='block mb-2'>
+								</div>
+								<div className='w-3/5'>
+								<label className='block mb-2 w-full px-4'>
 									Email
 									<input
 										type='email'
 										value={formData.email}
 										required
 										onChange={(e) => setFormData({...formData, email: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='flex w-full px-3 py-2 border border-gray-800 rounded'
 									/>
 								</label>
-								<label className='block mb-2'>
+								</div>
+								<div>
+								<label className='block mb-2 w-full px-4'>
 									Password
 									<input
 										type='password'
 										value={formData.password}
 										required
 										onChange={(e) => setFormData({...formData, password: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='flex w-full px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<label className='block mb-2'>
+								</div>
+								<div>
+								<label className='block mb-2 w-full px-4'>
 									Phone Number
 									<input
 										type='tel'
 										value={formData.phone_number}
 										required
 										onChange={(e) => setFormData({...formData, phone_number: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='w-full px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<button type='button' onClick={handleModalSubmit} className='px-4 py-2 bg-blue-500 text-white rounded'>
+								</div>
+								<div className='flex justify-center'>
+								<button type='button' onClick={handleModalSubmit} className='px-4 py-2 bg-blue-500 text-white rounded w-full'>
 									Submit
 								</button>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -258,7 +288,7 @@ const AddDoctor = () => {
 							<th className='py-3 px-6'>Name</th>
 							<th className='py-3 px-6'>Age</th>
 							<th className='py-3 px-6'>Sex</th>
-							<th className='py-3 px-6'>specialization</th>
+							<th className='py-3 px-6'>Specialization</th>
 							<th className='py-3 px-6'>Phone Number</th>
 							<th className='py-3 px-6'></th>
 						</tr>
