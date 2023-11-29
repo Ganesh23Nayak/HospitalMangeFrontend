@@ -8,7 +8,6 @@ import {toastEmitter} from '../configs/config';
 import ShowPassword from '../components/SVG/ShowPassword';
 import {ToastContainer} from 'react-toastify';
 import { Axios } from 'axios';
-import Axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
 const Signup = () => {
