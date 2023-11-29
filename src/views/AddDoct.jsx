@@ -156,7 +156,7 @@ const AddDoctor = () => {
 				{/* Modal */}
 				{isModalOpen && (
 					<div className='fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center'>
-						<div className='bg-white p-8 rounded-lg'>
+						<div className='bg-white p-8 rounded-lg '>
 							<button
 								onClick={() => setIsModalOpen(false)}
 								className='absolute right-4 top-24 text-white hover:text-gray-800'
@@ -168,13 +168,13 @@ const AddDoctor = () => {
 								{/* Input fields for time, date, doctor name, specialization */}
 								<div>
 								<label className='block mb-2 w-full px-4'>
-									Name
+									Full Name
 									<input
 										type='text'
 										value={formData.name}
 										required
 										onChange={(e) => setFormData({...formData, name: e.target.value})}
-										className='flex px-3 py-2 border border-gray-700 rounded'
+										className='flex w-96 px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
 								</div>
@@ -186,7 +186,7 @@ const AddDoctor = () => {
 										value={formData.age}
 										required
 										onChange={(e) => setFormData({...formData, age: e.target.value})}
-										className='flex w-full px-3 py-2 border border-gray-700 rounded'
+										className='flex w-20 px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
 								</div>
@@ -215,7 +215,7 @@ const AddDoctor = () => {
 													</option>
 												</select>
 											</div>
-								<div className='w-4/7'>
+								<div className='w-3/7'>
 								<label className='block mb-2 w-full px-4'>
 									Specialization
 									<input
@@ -251,7 +251,7 @@ const AddDoctor = () => {
 									/>
 								</label>
 								</div>
-								<div>
+								<div className='w-3/5'>
 								<label className='block mb-2 w-full px-4'>
 									Phone Number
 									<input
@@ -263,8 +263,8 @@ const AddDoctor = () => {
 									/>
 								</label>
 								</div>
-								<div className='flex justify-center'>
-								<button type='button' onClick={handleModalSubmit} className='px-4 py-2 bg-blue-500 text-white rounded w-full'>
+								<div className='flex justify-center ml-80'>
+								<button type='button' onClick={handleModalSubmit} className='px-5 py-3  bg-blue-500 text-white rounded-full w-full'>
 									Submit
 								</button>
 								</div>
