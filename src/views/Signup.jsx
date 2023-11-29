@@ -8,7 +8,11 @@ import {toastEmitter} from '../configs/config';
 import ShowPassword from '../components/SVG/ShowPassword';
 import {ToastContainer} from 'react-toastify';
 import { Axios } from 'axios';
+import Axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+
 const Signup = () => {
+	const navigate = useNavigate();
 	const [formType, setFormType] = useState('login');
 	const [showPassword, setShowPassword] = useState(false);
 	// const notify = () => toast.info('Signup Successful!');
@@ -26,15 +30,34 @@ const Signup = () => {
 		formData.forEach((value, key) => {
 			data[key] = value;
 		});
+		data['role'] = 'PATIENT';
+
 		// {notify()}
 		console.log('Form Data:', data);
 
+		Axios.post('http://localhost:3000/addUser', data, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+			.then((response) => {
+				if (response.data) {
+					alert('Signup Successful');
+					console.log('Signup Successful');
+				}
+			})
+			.catch((error) => {
+				// Handle any errors
+				alert('Signup Failed');
+				console.error('Error:', error);
+			});
+
+		setFormType('login');
 		setTimeout(() => {
 			el.disabled = false;
 		}, 2000);
 
 		e.target.reset();
-		setFormType('login');
 		// toast.error('Sorry, something went wrong. Please try again later.', toastEmitter);
 	};
 
@@ -52,12 +75,35 @@ const Signup = () => {
 
 		console.log('Form Data:', data);
 
+		Axios.post('http://localhost:3000/login', data, {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+			.then((response) => {
+				if (response.data) {
+					console.log('Login Successful');
+					if (response.data.user.role === 'PATIENT') {
+						navigate('/Patient');
+					} else if (response.data.user.role === 'DOCTOR') {
+						navigate('/Doctor');
+					} else {
+						navigate('/Administrator');
+					}
+				}
+			})
+			.catch((error) => {
+				// Handle any errors
+				alert(error);
+				console.error('Error:', error);
+			});
+
 		setTimeout(() => {
 			el.disabled = false;
 		}, 2000);
 
 		e.target.reset();
-		
+
 		// toast.error('Sorry, something went wrong. Please try again later.', toastEmitter);
 	};
 
@@ -114,8 +160,8 @@ const Signup = () => {
 											</div>
 										</div>
 										<div className='w-full px-4 grid place-items-center'>
-											<input type='submit' className='btn mb-5' value='Login' name='submitbtn'   />
-											
+											<input type='submit' className='btn mb-5' value='Login' name='submitbtn' />
+
 											<p onClick={() => setFormType('signup')} className='text-blue-500 cursor-pointer'>
 												Don't have an account? Sign Up
 											</p>
@@ -160,6 +206,19 @@ const Signup = () => {
 													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
 													placeholder='Enter your phone number'
 													name='phonenumber'
+													required
+												/>
+											</div>
+											<div className='w-full px-4'>
+												<label htmlFor='email' className='block text-sm font-medium text-body mb-3'>
+													Email
+												</label>
+												<input
+													type='email'
+													id='email'
+													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
+													placeholder='Enter your phone number'
+													name='email'
 													required
 												/>
 											</div>
@@ -220,7 +279,7 @@ const Signup = () => {
 										</div>
 										<div className='w-full px-4 grid place-items-center '>
 											<input type='submit' className='btn mb-5' value='Sign Up' name='submitbtn' />
-											
+
 											<p onClick={() => setFormType('login')} className='text-blue-500 cursor-pointer '>
 												Already have an account? Login
 											</p>
@@ -228,7 +287,6 @@ const Signup = () => {
 									</form>
 								)}
 							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -239,7 +297,6 @@ const Signup = () => {
 			<div className='absolute left-0 bottom-5 z-[-1]'>
 				<SignupLeft />
 			</div>
-			
 		</section>
 	);
 };
