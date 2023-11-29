@@ -126,28 +126,6 @@ const Nav = ({isNavOpen, toggleNavbar, list_displays}) => (
 	</div>
 );
 
-// const Link = ({id, name, toggleNavbar}) => (
-// 	<li
-// 		className='relative group'
-// 		onClick={() => {
-// 			scrollIntoView(id);
-// 			toggleNavbar();
-// 			if (Patirent_list) {
-// 				if (id === 'logout') {
-// 					console.log('logout');
-// 					navigate('/');
-// 				} else {
-// 					console.log(id);
-// 				}
-// 			}
-// 		}}
-// 	>
-// 		<span className='menu-scroll text-base text-body font-medium group-hover:text-primary-600 group-dark:hover:text-primary-500 py-2 lg:py-6 lg:inline-flex lg:px-0 flex mx-8 lg:mr-0 cursor-pointer select-none'>
-// 			{name}
-// 		</span>
-// 	</li>
-// );
-
 const Link = ({id, name, toggleNavbar}) => {
 	const navigate = useNavigate();
 
@@ -157,22 +135,17 @@ const Link = ({id, name, toggleNavbar}) => {
 			onClick={() => {
 				scrollIntoView(id);
 				toggleNavbar();
-				if (Patirent_list) {
-					if (id === 'logout') {
-						console.log('logout');
-						navigate('/');
-					} else {
-						console.log(id);
-					}
+				if (id === 'logout') {
+					console.log('logout');
+					navigate('/');
+				} else {
+					console.log(id);
 				}
 			}}
 		>
-			<RouterLink
-				to={`/${id}`}
-				className='menu-scroll text-base text-body font-medium group-hover:text-primary-600 group-dark:hover:text-primary-500 py-2 lg:py-6 lg:inline-flex lg:px-0 flex mx-8 lg:mr-0 cursor-pointer select-none'
-			>
+			<span className='menu-scroll text-base text-body font-medium group-hover:text-primary-600 group-dark:hover:text-primary-500 py-2 lg:py-6 lg:inline-flex lg:px-0 flex mx-8 lg:mr-0 cursor-pointer select-none'>
 				{name}
-			</RouterLink>
+			</span>
 		</li>
 	);
 };
