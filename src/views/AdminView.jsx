@@ -52,8 +52,7 @@ const AdminView = () => {
 			});
 	};
 	const handleModalSubmit = () => {
-		if (formData.name && formData.age && formData.sex && formData.email && formData.password) 
-		{
+		if (formData.name && formData.age && formData.sex && formData.email && formData.password) {
 			// Use spread syntax to create a copy of formData
 			const data = {...formData};
 
@@ -62,7 +61,7 @@ const AdminView = () => {
 			// Assuming you have a backend endpoint to handle the post request
 			Axios.post('http://localhost:3000/addUser', data, {
 				headers: {
-					'Content-Type': 'application/json',	
+					'Content-Type': 'application/json',
 				},
 			})
 				.then((response) => {
@@ -93,9 +92,7 @@ const AdminView = () => {
 			setTimeout(() => {
 				setIsNotificationVisible(false);
 			}, 10000);
-		} 
-		else 
-		{
+		} else {
 			alert('Please fill in all required fields.');
 		}
 	};
@@ -135,84 +132,88 @@ const AdminView = () => {
 							<h2 className='text-2xl font-bold mb-4'>Add Admins</h2>
 							<form className='w-full max-w-screen-md mx-auto gap-4 container mx-wrap '>
 								{/* Input fields for time, date, doctor name, department */}
-							<div>
-								<label className='block mb-2 w-full px-4'>
-									Name
-									<input
-										type='text'
-										value={formData.name}
-										required // Set the initial value to the form data
-										onChange={(e) => setFormData({...formData, name: e.target.value})}
-										className='flex w-96 px-3 py-2 border border-gray-700 rounded'
-									/>
-								</label>
-							</div>
-							<div>
-								<label className='block mb- w-full px-4'>
-									Age
-									<input
-										type='integer'
-										value={formData.age}
+								<div>
+									<label className='block mb-2 w-full px-4'>
+										Name
+										<input
+											type='text'
+											value={formData.name}
+											required // Set the initial value to the form data
+											onChange={(e) => setFormData({...formData, name: e.target.value})}
+											className='flex w-96 px-3 py-2 border border-gray-700 rounded'
+										/>
+									</label>
+								</div>
+								<div>
+									<label className='block mb- w-full px-4'>
+										Age
+										<input
+											type='integer'
+											value={formData.age}
+											required
+											onChange={(e) => setFormData({...formData, age: e.target.value})}
+											className='flex w-20 px-3 py-2 border border-gray-700 rounded'
+										/>
+									</label>
+								</div>
+								<div>
+									<label htmlFor='gender' className='block text-sm font-medium text-gray-700 mb-1 w-full px-5'>
+										Gender
+									</label>
+									<select
+										id='gender'
+										value={formData.sex}
+										onChange={(e) => setFormData({...formData, sex: e.target.value})}
+										className='flex w-full px-3 py-2.5 border border-gray-700 rounded'
 										required
-										onChange={(e) => setFormData({...formData, age: e.target.value})}
-										className='flex w-20 px-3 py-2 border border-gray-700 rounded'
-									/>
-								</label>
-							</div>
-							<div>
-												<label htmlFor='gender' className='block text-sm font-medium text-gray-700 mb-1 w-full px-5'>
-													Gender
-												</label>
-												<select
-													id='gender'
-													value={formData.sex}
-													onChange={(e) => setFormData({...formData, sex: e.target.value})}
-													className='flex w-full px-3 py-2.5 border border-gray-700 rounded'
-													required
-												>
-													<option className='font-semibold' value=''>
-														Select Gender
-													</option>
-													<option className='font-semibold' value='male'>
-														Male
-													</option>
-													<option className=' font-semibold' value='female'>
-														Female
-													</option>
-													<option className='font-semibold' value='other'>
-														Other
-													</option>
-												</select>
-											</div>
-							<div>
-								<label className='block mb-2 w-full px-4'>
-									Email
-									<input
-										type='email'
-										value={formData.email}
-										required
-										onChange={(e) => setFormData({...formData, email: e.target.value})}
-										className='w-96 flex px-3 py-2 border border-gray-700 rounded'
-									/>
-								</label>
-							</div>
-							<div className='w-2/5' >
-								<label className='block mb-2 w-full px-4'>
-									Password
-									<input
-										type='password'
-										value={formData.password}
-										required
-										onChange={(e) => setFormData({...formData, password: e.target.value})}
-										className='flex w-full px-3 py-2 border border-gray-700 rounded'
-									/>
-								</label>
-							</div>
-							<div className='flex justify-center ml-80'>
-							<button type='button' onClick={handleModalSubmit} className='px-7 py-2 bg-blue-500 text-white rounded-full w-full'>
-								Submit
-							</button>
-							</div>
+									>
+										<option className='font-semibold' value=''>
+											Select Gender
+										</option>
+										<option className='font-semibold' value='male'>
+											Male
+										</option>
+										<option className=' font-semibold' value='female'>
+											Female
+										</option>
+										<option className='font-semibold' value='other'>
+											Other
+										</option>
+									</select>
+								</div>
+								<div>
+									<label className='block mb-2 w-full px-4'>
+										Email
+										<input
+											type='email'
+											value={formData.email}
+											required
+											onChange={(e) => setFormData({...formData, email: e.target.value})}
+											className='w-96 flex px-3 py-2 border border-gray-700 rounded'
+										/>
+									</label>
+								</div>
+								<div className='w-2/5'>
+									<label className='block mb-2 w-full px-4'>
+										Password
+										<input
+											type='password'
+											value={formData.password}
+											required
+											onChange={(e) => setFormData({...formData, password: e.target.value})}
+											className='flex w-full px-3 py-2 border border-gray-700 rounded'
+										/>
+									</label>
+								</div>
+								<div className='flex justify-center ml-80'>
+									<button
+										type='button'
+										onClick={handleModalSubmit}
+										className='px-7 py-2 bg-blue-500 text-white rounded-full w-full'
+									>
+										Submit
+									</button>
+								</div>
 							</form>
 						</div>
 					</div>
