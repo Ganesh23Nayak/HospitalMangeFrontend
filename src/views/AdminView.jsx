@@ -11,7 +11,7 @@ const AdminView = () => {
 		sex: '',
 		email: '',
 		password: '',
-		role: 'ADMININISTRATOR',
+		role: 'ADMINISTRATOR',
 		// Add more form fields as needed
 	});
 	const CloseIcon = () => (
