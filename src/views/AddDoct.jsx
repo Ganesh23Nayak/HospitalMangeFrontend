@@ -148,14 +148,14 @@ const AddDoctor = () => {
 	};
 
 	return (
-		<div className='w-full max-w-screen-lg mx-auto mt-8'>
+		<div className='w-full max-w-screen-lg mx-auto mt-8 '>
 			<div className='text-center mb-8'>
 				<button className='px-4 py-2 bg-blue-500 text-white rounded' onClick={() => setIsModalOpen(true)}>
 					Add Doctors
 				</button>
 				{/* Modal */}
 				{isModalOpen && (
-					<div className='fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center'>
+					<div className='fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center card-gradient '>
 						<div className='bg-white p-8 rounded-lg '>
 							<button
 								onClick={() => setIsModalOpen(false)}
@@ -174,7 +174,7 @@ const AddDoctor = () => {
 										value={formData.name}
 										required
 										onChange={(e) => setFormData({...formData, name: e.target.value})}
-										className='flex w-96 px-3 py-2 border border-gray-700 rounded'
+										className='flex w-96 px-3 py-2 border border-gray-700 rounded '
 									/>
 								</label>
 								</div>
