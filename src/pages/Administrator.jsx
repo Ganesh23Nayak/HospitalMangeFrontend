@@ -7,6 +7,9 @@ import Header from '../views/Header';
 import {Admin_list} from '../configs/config';
 
 const Administrator = () => {
+	const userid = localStorage.getItem('user');
+	console.log('user:', userid);
+	console.log(userid);
 	useEffect(() => {
 		animateList.map((animate) => animateJS(animate));
 	});

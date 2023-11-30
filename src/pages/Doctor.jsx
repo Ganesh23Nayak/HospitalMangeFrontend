@@ -7,13 +7,16 @@ import Header from '../views/Header';
 import DoctorTable from '../components/DoctorTable';
 
 const Doctor = () => {
+	const userid = localStorage.getItem('user');
+	console.log('user:', userid);
+	console.log(userid);
 	useEffect(() => {
 		animateList.map((animate) => animateJS(animate));
 	});
 	return (
 		<>
 			<Header list_displays={Doctor_list} />
-			<DoctorTable />;
+			<DoctorTable userid={userid} />;
 		</>
 	);
 };
