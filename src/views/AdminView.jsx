@@ -1,6 +1,19 @@
 import React, {useState} from 'react';
-
+import {useEffect} from 'react';
+import Axios from 'axios';
 const AdminView = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [tableData, setTableData] = useState([]);
+	const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+	const [formData, setFormData] = useState({
+		name: '',
+		age: '',
+		sex: '',
+		email: '',
+		password: '',
+		role: 'ADMININISTRATOR',
+		// Add more form fields as needed
+	});
 	const CloseIcon = () => (
 		<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' className='h-6 w-6'>
 			<path
@@ -11,53 +24,78 @@ const AdminView = () => {
 			/>
 		</svg>
 	);
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [tableData, setTableData] = useState([
-		{
-			name: 'Liam James',
-			age: 19,
-			gender: 'Male',
-		},
-		{
-			name: 'Kritarth',
-			age: 19,
-			gender: 'Male',
-		},
-		{
-			name: 'Ganesh',
-			age: 19,
-			gender: 'Male',
-		},
-		{
-			name: 'Test',
-			age: 19,
-			gender: 'Male',
-		},
-	]);
-	const [isNotificationVisible, setIsNotificationVisible] = useState(false);
-	const [formData, setFormData] = useState({
-		name: '',
-		age: '',
-		gender: '',
-		// Add more form fields as needed
-	});
 	const [lastAddedData, setLastAddedData] = useState(null);
+
+	useEffect(() => {
+		// Fetch data from the database on component mount
+		fetchDataFromDatabase();
+	}, []);
+
+	const fetchDataFromDatabase = () => {
+		Axios.post('http://localhost:3000/getadmin')
+			.then((response) => {
+				if (response.data) {
+					const formattedData = response.data.admins.map((administrator) => ({
+						id: administrator.id,
+						name: administrator.name,
+						age: administrator.age,
+						email: administrator.email,
+						sex: administrator.sex,
+						password: administrator.password,
+					}));
+					setTableData(formattedData);
+				}
+				console.log(response.data);
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+			});
+	};
 	const handleModalSubmit = () => {
-		if (formData.name && formData.age && formData.gender) {
-			setTableData([...tableData, formData]);
-			setLastAddedData(formData);
-			setIsModalOpen(false);
-			setIsNotificationVisible(true);
+		if (formData.name && formData.age && formData.sex && formData.email && formData.password) 
+		{
+			// Use spread syntax to create a copy of formData
+			const data = {...formData};
+
+			console.log('Form Data:', data);
+
+			// Assuming you have a backend endpoint to handle the post request
+			Axios.post('http://localhost:3000/addUser', data, {
+				headers: {
+					'Content-Type': 'application/json',	
+				},
+			})
+				.then((response) => {
+					if (response.data) {
+						alert('Admin Added Successfully');
+						console.log('Successful');
+						setTableData([...tableData, data]);
+						setLastAddedData(data);
+						setIsModalOpen(false);
+						setIsNotificationVisible(true);
+					}
+				})
+				.catch((error) => {
+					// Handle any errors
+					alert('Failed to Add Admin');
+					console.error('Error:', error);
+				});
+
 			setFormData({
 				name: '',
 				age: '',
-				gender: '',
+				sex: '',
+				email: '',
+				password: '',
+				role: 'ADMINISTRATOR',
 			});
 
 			setTimeout(() => {
 				setIsNotificationVisible(false);
 			}, 10000);
-		} else {
+		} 
+		else 
+		{
 			alert('Please fill in all required fields.');
 		}
 	};
@@ -86,7 +124,7 @@ const AdminView = () => {
 				</button>
 				{/* Modal */}
 				{isModalOpen && (
-					<div className='fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center'>
+					<div className='fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center card-gradient'>
 						<div className='bg-white p-8 rounded-lg'>
 							<button
 								onClick={() => setIsModalOpen(false)}
@@ -95,61 +133,86 @@ const AdminView = () => {
 								<CloseIcon />
 							</button>
 							<h2 className='text-2xl font-bold mb-4'>Add Admins</h2>
-							<form>
+							<form className='w-full max-w-screen-md mx-auto gap-4 container mx-wrap '>
 								{/* Input fields for time, date, doctor name, department */}
-								<label className='block mb-2'>
+							<div>
+								<label className='block mb-2 w-full px-4'>
 									Name
 									<input
 										type='text'
 										value={formData.name}
 										required // Set the initial value to the form data
 										onChange={(e) => setFormData({...formData, name: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='flex w-96 px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<label className='block mb-2'>
+							</div>
+							<div>
+								<label className='block mb- w-full px-4'>
 									Age
 									<input
 										type='integer'
 										value={formData.age}
 										required
 										onChange={(e) => setFormData({...formData, age: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='flex w-20 px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<label className='block mb-2'>
-									Gender
-									<input
-										type='text'
-										value={formData.gender}
-										required
-										onChange={(e) => setFormData({...formData, gender: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
-									/>
-								</label>
-								<label className='block mb-2'>
+							</div>
+							<div>
+												<label htmlFor='gender' className='block text-sm font-medium text-gray-700 mb-1 w-full px-5'>
+													Gender
+												</label>
+												<select
+													id='gender'
+													value={formData.sex}
+													onChange={(e) => setFormData({...formData, sex: e.target.value})}
+													className='flex w-full px-3 py-2.5 border border-gray-700 rounded'
+													required
+												>
+													<option className='font-semibold' value=''>
+														Select Gender
+													</option>
+													<option className='font-semibold' value='male'>
+														Male
+													</option>
+													<option className=' font-semibold' value='female'>
+														Female
+													</option>
+													<option className='font-semibold' value='other'>
+														Other
+													</option>
+												</select>
+											</div>
+							<div>
+								<label className='block mb-2 w-full px-4'>
 									Email
 									<input
 										type='email'
 										value={formData.email}
 										required
 										onChange={(e) => setFormData({...formData, email: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='w-96 flex px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<label className='block mb-2'>
+							</div>
+							<div className='w-2/5' >
+								<label className='block mb-2 w-full px-4'>
 									Password
 									<input
 										type='password'
 										value={formData.password}
 										required
 										onChange={(e) => setFormData({...formData, password: e.target.value})}
-										className='w-full px-3 py-2 border border-gray-300 rounded'
+										className='flex w-full px-3 py-2 border border-gray-700 rounded'
 									/>
 								</label>
-								<button type='button' onClick={handleModalSubmit} className='px-4 py-2 bg-blue-500 text-white rounded'>
-									Submit
-								</button>
+							</div>
+							<div className='flex justify-center ml-80'>
+							<button type='button' onClick={handleModalSubmit} className='px-7 py-2 bg-blue-500 text-white rounded-full w-full'>
+								Submit
+							</button>
+							</div>
 							</form>
 						</div>
 					</div>
@@ -171,6 +234,8 @@ const AdminView = () => {
 							<th className='py-3 px-6'>Name</th>
 							<th className='py-3 px-6'>Age</th>
 							<th className='py-3 px-6'>Gender</th>
+							<th className='py-3 px-6'>Email</th>
+							<th className='py-3 px-6'>Password</th>
 							<th className='py-3 px-6'></th>
 						</tr>
 					</thead>
@@ -179,7 +244,9 @@ const AdminView = () => {
 							<tr key={idx}>
 								<td className='px-6 py-4 whitespace-nowrap'>{item.name}</td>
 								<td className='px-6 py-4 whitespace-nowrap'>{item.age}</td>
-								<td className='px-6 py-4 whitespace-nowrap'>{item.gender}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.sex}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.email}</td>
+								<td className='px-6 py-4 whitespace-nowrap'>{item.password}</td>
 								<td>
 									<button
 										className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center'
