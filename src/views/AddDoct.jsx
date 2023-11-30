@@ -42,7 +42,6 @@ const AddDoctor = () => {
 						name: doctor.name,
 						age: doctor.age,
 						email: doctor.email,
-						age:doctor.age,
 						sex: doctor.sex,
 						phone_number: doctor.phone_number,
 						specialization: doctor.doctor.length > 0 ? doctor.doctor[0].specialization : 'N/A',
