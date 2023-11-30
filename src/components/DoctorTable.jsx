@@ -1,130 +1,119 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Axios from 'axios';
 
-const DoctorTable = () => {
+const DoctorTable = (userid) => {
 	const [activeTab, setActiveTab] = useState('first');
-
 	const [tableData, setTableData] = useState({
-		first: [
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-			
-		],
-		second: [
-			// ... Table data for the second tab
-			{
-				name: 'Liam James',
-				email: 'liamjames@example.com',
-				problem: 'Sore Eyes',
-				date: '2023-11-01',
-				time: '10 AM',
-			},
-		],
-		// Add more tabs and their respective data if needed
+		first: [],
+		second: [],
 	});
+	const doctId = parseInt(userid.userid);
+	// console.log('doct', doctId);
+	useEffect(() => {
+		// Fetch data from the backend on component mount
+		fetchDataFromBackend();
+	}, []);
+
+	const fetchDataFromBackend = () => {
+		Axios.post('http://localhost:3000/getappointments', {doctId}) // Adjust the endpoint as per your backend API
+			.then((response) => {
+				if (response.data && response.data.appointments) {
+					const formattedData = response.data.appointments.map((appointment) => ({
+						id: appointment.id,
+						name: appointment.patient.user.name, // Assuming patient has a name property
+						email: appointment.patient.user.email, // Assuming patient has an email property
+						problem: appointment.patient.health_conditions,
+						date: new Date(appointment.appointment_date).toLocaleDateString(), // Format date
+						time: new Date(appointment.appointment_time).toLocaleTimeString(),
+						status: appointment.status,
+					}));
+
+					const scheduledAppointments = formattedData.filter((item) => item.status === 'SCHEDULED');
+					const confirmedAppointments = formattedData.filter((item) => item.status === 'CONFIRMED');
+
+					setTableData({first: scheduledAppointments, second: confirmedAppointments});
+
+					// setTableData({first: formattedData, second: []});
+				}
+				// console.log(response.data);
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+			});
+	};
 
 	const handleTabClick = (tab) => {
 		setActiveTab(tab);
 	};
-	const handleDelete = (index) => {
-		const updatedTableData = [...tableData[activeTab]];
-		updatedTableData.splice(index, 1);
-		setTableData({...tableData, [activeTab]: updatedTableData});
+
+	const handleDelete = (id) => {
+		if (window.confirm('Are you sure you want to delete this appointment?')) {
+			// Send a request to the backend to delete the appointment
+			Axios.post('http://localhost:3000/cancelappointment', {appointmentId: id})
+				.then((response) => {
+					if (response.data.success) {
+						// If deletion is successful, update the state to remove the appointment
+						const updatedTableData = [...tableData[activeTab]];
+						const indexToRemove = updatedTableData.findIndex((item) => item.id === id);
+						updatedTableData.splice(indexToRemove, 1);
+						setTableData({...tableData, [activeTab]: updatedTableData});
+
+						alert('Appointment deleted successfully!');
+					} else {
+						alert('Error deleting appointment. Please try again.');
+					}
+				})
+				.catch((error) => {
+					console.error('Error deleting appointment:', error);
+					alert('Error deleting appointment. Please try again.');
+				});
+		}
+	};
+
+	const handleAccept = (id) => {
+		console.log('appointment id ', id);
+
+		if (window.confirm('Are you sure you want to accept this appointment?')) {
+			Axios.post('http://localhost:3000/acceptappointment', {appointmentId: id})
+				.then((response) => {
+					if (response.data.success) {
+						console.log('Appointment accepted successfully!');
+						const updatedTableData = [...tableData[activeTab]];
+						const indexToRemove = updatedTableData.findIndex((item) => item.id === id);
+						updatedTableData.splice(indexToRemove, 1);
+						setTableData({...tableData, [activeTab]: updatedTableData});
+					} else {
+						alert('Error accepting appointment. Please try again.');
+					}
+				})
+				.catch((error) => {
+					console.error('Error accepting appointment catch :', error);
+					alert('Error accepting appointment. Please try again.');
+				});
+		}
+	};
+
+	const handleDone = (id) => {
+		console.log('appointment id ', id);
+
+		if (window.confirm('Done with this appointment?')) {
+			Axios.post('http://localhost:3000/doneappointment', {appointmentId: id})
+				.then((response) => {
+					if (response.data.success) {
+						console.log('Appointment accepted successfully!');
+						const updatedTableData = [...tableData[activeTab]];
+						const indexToRemove = updatedTableData.findIndex((item) => item.id === id);
+						updatedTableData.splice(indexToRemove, 1);
+						setTableData({...tableData, [activeTab]: updatedTableData});
+					} else {
+						alert('Error accepting appointment. Please try again.');
+					}
+				})
+				.catch((error) => {
+					console.error('Error accepting appointment catch :', error);
+					alert('Error accepting appointment. Please try again.');
+				});
+		}
 	};
 
 	return (
@@ -167,14 +156,27 @@ const DoctorTable = () => {
 								<td className='px-6 py-4 whitespace-nowrap dark:text-white'>{item.date}</td>
 								<td className='px-6 py-4 whitespace-nowrap dark:text-white'>{item.time}</td>
 								<td className='text-right px-6 whitespace-nowrap'>
-									<a
-										href='/'
-										className='py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-green-200 rounded-lg'
-									>
-										ACCEPT
-									</a>
+									{activeTab === 'first' && (
+										<button
+											onClick={() => handleAccept(item.id)}
+											href='/'
+											className='py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-green-200 rounded-lg'
+										>
+											ACCEPT
+										</button>
+									)}
+
+									{activeTab === 'second' && (
+										<button
+											onClick={() => handleDone(item.id)}
+											href='/'
+											className='py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-green-200 rounded-lg'
+										>
+											DONE
+										</button>
+									)}
 									<button
-										onClick={() => handleDelete(idx)}
+										onClick={() => handleDelete(item.id)}
 										href='/'
 										className='py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-red-200 rounded-lg'
 									>
