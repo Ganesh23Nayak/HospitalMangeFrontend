@@ -51,6 +51,7 @@ const ListDoct = (userid) => {
 		console.log(id);
 		const data = {
 			patientId: id,
+			health_conditions: formData.description,
 			doctorId: formData.person.doctorId,
 			appointment_date: new Date(formData.date + 'T' + formData.time).toISOString(),
 			appointment_time: new Date(formData.date + 'T' + formData.time).toISOString(),

@@ -18,7 +18,7 @@ const Patient = () => {
 		<div>
 			<Header list_displays={Patirent_list} />
 			<ListDoct userid={userid} />
-			<PatientDashBoard />
+			<PatientDashBoard userid={userid} />
 		</div>
 	);
 };
