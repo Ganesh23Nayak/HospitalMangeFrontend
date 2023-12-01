@@ -20,7 +20,7 @@ const DocCards = ({person, onClick}) => {
 					</div>
 				</div>
 				<p className=' text-lg font-small text-sub leading-relaxed pt-8 mt-6 border-t border-primary-800 dark:border-primary-100'>
-					<p>Gender:{gender} Email:{email} PhoneNumber:+91{phone}</p>
+					Gender:{ gender } Email:{ email } PhoneNumber:+91{ phone }
 				</p>
 				<div className='absolute right-0 bottom-0 z-[-1]'>
 					<svg width={49} height={60} viewBox='0 0 49 60' fill='none' xmlns='http://www.w3.org/2000/svg'>
