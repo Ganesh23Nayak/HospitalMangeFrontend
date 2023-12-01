@@ -14,6 +14,34 @@ const DoctorTable = (userid) => {
 		fetchDataFromBackend();
 	}, []);
 
+	// 	const { id } = req.body;
+
+	// 	try {
+	// 	  const appointments = await prisma.appointment.findMany({
+	// 		where: {
+	// 		  patientId: parseInt(id),
+	// 		},
+	// 		include: {
+	// 		  doctor: {
+	// 			select: {
+	// 			  user: {
+	// 				select: {
+	// 				  name: true,
+	// 				  email: true,
+	// 				},
+	// 			  },
+	// 			},
+	// 		  },
+	// 		},
+	// 	  });
+
+	// 	  res.json({ appointments });
+	// 	} catch (error) {
+	// 	  console.error('Error fetching appointments:', error);
+	// 	  res.status(500).json({ error: 'Internal Server Error' });
+	// 	}
+	//   });
+
 	const fetchDataFromBackend = () => {
 		Axios.post('http://localhost:3000/getappointments', {doctId}) // Adjust the endpoint as per your backend API
 			.then((response) => {
