@@ -7,7 +7,7 @@ import {toast} from 'react-toastify';
 import {toastEmitter} from '../configs/config';
 import ShowPassword from '../components/SVG/ShowPassword';
 import {ToastContainer} from 'react-toastify';
-import  Axios  from 'axios';
+import Axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
 const Signup = () => {
@@ -231,6 +231,7 @@ const Signup = () => {
 												</label>
 												<select
 													id='gender'
+													name='sex'
 													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
 													required
 												>
