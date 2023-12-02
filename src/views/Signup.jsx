@@ -220,7 +220,7 @@ const Signup = () => {
 													type='email'
 													id='email'
 													className='w-full border border-transparent bg-primary-100 dark:bg-primary-600 dark:bg-opacity-10 rounded-md py-3 px-6 text-sub text-base placeholder-[#8a7f80] dark:placeholder-[#d7d3d3] outline-none focus-visible:shadow-none focus:border-primary-800 mb-5'
-													placeholder='Enter your phone number'
+													placeholder='Enter your email address'
 													name='email'
 													required
 												/>
