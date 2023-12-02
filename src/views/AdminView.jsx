@@ -106,11 +106,22 @@ const AdminView = () => {
 		}
 	};
 
-	const handleRemove = (index) => {
-		const updatedTableData = [...tableData];
-		updatedTableData.splice(index, 1);
-		setTableData(updatedTableData);
-		alert('Admin removed successfully');
+	const handleRemove = (email, index) => {
+		console.log(email, index);
+		Axios.delete(`http://localhost:3000/removeusr/${email}`)
+			.then((response) => {
+				if (response.data.success) {
+					alert('Admin removed successfully');
+					const updatedTableData = tableData.filter((item) => item.email !== email);
+					setTableData(updatedTableData);
+				} else {
+					alert('Failed to remove Admin');
+				}
+			})
+			.catch((error) => {
+				console.error('Error removing admin:', error);
+				alert('Failed to remove admin');
+			});
 	};
 
 	return (
@@ -251,7 +262,7 @@ const AdminView = () => {
 								<td>
 									<button
 										className='px-4 py-2 hover:bg-red-500  dark:text-white rounded justify-center'
-										onClick={() => handleRemove(idx)}
+										onClick={() => handleRemove(item.email,idx)}
 									>
 										Remove
 									</button>
