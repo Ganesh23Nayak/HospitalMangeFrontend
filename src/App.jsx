@@ -4,7 +4,6 @@ import Patient from './pages/Patient';
 import Doctor from './pages/Doctor';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Error from './pages/error';
-
 function App() {
 	return (
 		<>

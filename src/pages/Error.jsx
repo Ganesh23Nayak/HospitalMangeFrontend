@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
-export default () => {
+const Error = () => {
 	const navigate = useNavigate();
 	const handleonClick = () => {
 		navigate('/');
@@ -30,3 +30,5 @@ export default () => {
 		</main>
 	);
 };
+
+export default Error;
