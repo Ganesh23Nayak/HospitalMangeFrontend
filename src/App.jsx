@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Patient from './pages/Patient';
 import Doctor from './pages/Doctor';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Error from './pages/error';
+import Error from './pages/Error';
 function App() {
 	return (
 		<>
