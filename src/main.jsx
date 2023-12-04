@@ -6,8 +6,4 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'animate.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>
-);
+root.render(<App />);
