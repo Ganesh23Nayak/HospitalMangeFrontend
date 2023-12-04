@@ -9,7 +9,7 @@ const AddDoct = () => {
 	}, []);
 
 	const fetchDataFromBackend = () => {
-		Axios.post('http://localhost:3000/getpatient') // Adjust the endpoint as per your backend API
+		Axios.post('process.env.REACT_APP_SERVER_URL/getpatient') // Adjust the endpoint as per your backend API
 			.then((response) => {
 				if (response.data) {
 					const formattedData = response.data.patients.map((patient) => ({
@@ -31,7 +31,7 @@ const AddDoct = () => {
 
 	const handleRemove = (email, index) => {
 		console.log(email, index);
-		Axios.delete(`http://localhost:3000/removeusr/${email}`)
+		Axios.delete(`process.env.REACT_APP_SERVER_URL/removeusr/${email}`)
 			.then((response) => {
 				if (response.data.success) {
 					alert('Patient removed successfully');

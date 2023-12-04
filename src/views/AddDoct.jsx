@@ -34,7 +34,7 @@ const AddDoctor = () => {
 	}, []);
 
 	const fetchDataFromDatabase = () => {
-		Axios.post('http://localhost:3000/getdoctor')
+		Axios.post('process.env.REACT_APP_SERVER_URL/getdoctor')
 			.then((response) => {
 				if (response.data) {
 					const formattedData = response.data.doctors.map((doctor) => ({
@@ -62,7 +62,7 @@ const AddDoctor = () => {
 			console.log('Form Data:', data);
 
 			// Assuming you have a backend endpoint to handle the post request
-			Axios.post('http://localhost:3000/addUser', data, {
+			Axios.post('process.env.REACT_APP_SERVER_URL/addUser', data, {
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -104,7 +104,7 @@ const AddDoctor = () => {
 
 	const handleUndoClick = () => {
 		if (lastAddedData) {
-			Axios.delete(`http://localhost:3000/removeDoctor/${lastAddedData.id}`)
+			Axios.delete(`process.env.REACT_APP_SERVER_URL/removeDoctor/${lastAddedData.id}`)
 				.then((response) => {
 					if (response.data) {
 						alert('Doctor removed successfully');
@@ -130,7 +130,7 @@ const AddDoctor = () => {
 
 	const handleRemove = (email, index) => {
 		console.log(email, index);
-		Axios.delete(`http://localhost:3000/removeusr/${email}`)
+		Axios.delete(`process.env.REACT_APP_SERVER_URL/removeusr/${email}`)
 			.then((response) => {
 				if (response.data.success) {
 					alert('Doctor removed successfully');

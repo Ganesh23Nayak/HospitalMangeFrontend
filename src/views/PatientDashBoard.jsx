@@ -16,7 +16,7 @@ const PatientDashBoard = (userid) => {
 
 	const fetchAppointments = async () => {
 		try {
-			const response = await Axios.post('http://localhost:3000/getpatientappointments', {id});
+			const response = await Axios.post('process.env.REACT_APP_SERVER_URL/getpatientappointments', {id});
 			if (response.data && response.data.appointments) {
 				const formattedData = response.data.appointments.map((appointment) => ({
 					id: appointment.id,
@@ -61,7 +61,7 @@ const PatientDashBoard = (userid) => {
 	// 	if (window.confirm('Are you sure you want to delete this appointment?')) {
 	// 		try {
 	// 			// Send a request to the backend to delete the appointment
-	// 			const response = await Axios.delete('http://localhost:3000/deleteAppointment', {data: {appointmentId: idx}});
+	// 			const response = await Axios.delete('process.env.REACT_APP_SERVER_URL/deleteAppointment', {data: {appointmentId: idx}});
 
 	// 			if (response.data.success) {
 	// 				// If deletion is successful, update the state to remove the appointment
@@ -85,7 +85,9 @@ const PatientDashBoard = (userid) => {
 		if (window.confirm('Are you sure you want to delete this appointment?')) {
 			try {
 				// Send a request to the backend to delete the appointment
-				const response = await Axios.delete('http://localhost:3000/deleteAppointment', {data: {appointmentId: idx}});
+				const response = await Axios.delete('process.env.REACT_APP_SERVER_URL/deleteAppointment', {
+					data: {appointmentId: idx},
+				});
 
 				if (response.data.deletedAppointment) {
 					// If deletion is successful, update the state to remove the appointment

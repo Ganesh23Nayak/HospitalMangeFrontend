@@ -43,7 +43,7 @@ const DoctorTable = (userid) => {
 	//   });
 
 	const fetchDataFromBackend = () => {
-		Axios.post('http://localhost:3000/getappointments', {doctId}) // Adjust the endpoint as per your backend API
+		Axios.post('process.env.REACT_APP_SERVER_URL/getappointments', {doctId}) // Adjust the endpoint as per your backend API
 			.then((response) => {
 				if (response.data && response.data.appointments) {
 					const formattedData = response.data.appointments.map((appointment) => ({
@@ -77,7 +77,7 @@ const DoctorTable = (userid) => {
 	const handleDelete = (id) => {
 		if (window.confirm('Are you sure you want to delete this appointment?')) {
 			// Send a request to the backend to delete the appointment
-			Axios.post('http://localhost:3000/cancelappointment', {appointmentId: id})
+			Axios.post('process.env.REACT_APP_SERVER_URL/cancelappointment', {appointmentId: id})
 				.then((response) => {
 					if (response.data.success) {
 						// If deletion is successful, update the state to remove the appointment
@@ -102,7 +102,7 @@ const DoctorTable = (userid) => {
 		console.log('appointment id ', id);
 
 		if (window.confirm('Are you sure you want to accept this appointment?')) {
-			Axios.post('http://localhost:3000/acceptappointment', {appointmentId: id})
+			Axios.post('process.env.REACT_APP_SERVER_URL/acceptappointment', {appointmentId: id})
 				.then((response) => {
 					if (response.data.success) {
 						console.log('Appointment accepted successfully!');
@@ -125,7 +125,7 @@ const DoctorTable = (userid) => {
 		console.log('appointment id ', id);
 
 		if (window.confirm('Done with this appointment?')) {
-			Axios.post('http://localhost:3000/doneappointment', {appointmentId: id})
+			Axios.post('process.env.REACT_APP_SERVER_URL/doneappointment', {appointmentId: id})
 				.then((response) => {
 					if (response.data.success) {
 						console.log('Appointment accepted successfully!');

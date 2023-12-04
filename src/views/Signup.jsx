@@ -34,7 +34,7 @@ const Signup = () => {
 		// {notify()}
 		console.log('Form Data:', data);
 
-		Axios.post('http://localhost:3000/addUser', data, {
+		Axios.post('process.env.REACT_APP_SERVER_URL/addUser', data, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -74,7 +74,7 @@ const Signup = () => {
 
 		console.log('Form Data:', data);
 
-		Axios.post('http://localhost:3000/login', data, {
+		Axios.post('process.env.REACT_APP_SERVER_URL/login', data, {
 			headers: {
 				'Content-Type': 'application/json',
 			},

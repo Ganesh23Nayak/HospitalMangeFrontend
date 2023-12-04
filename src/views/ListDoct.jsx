@@ -14,7 +14,7 @@ const ListDoct = (userid) => {
 	const [doctors, setDoctors] = useState([]);
 
 	useEffect(() => {
-		Axios.post('http://localhost:3000/getdoctor')
+		Axios.post('process.env.REACT_APP_SERVER_URL/getdoctor')
 			.then((response) => {
 				// console.log(response.data.doctors);
 				const formattedDoctors = response.data.doctors.map((doctor) => {
@@ -59,7 +59,7 @@ const ListDoct = (userid) => {
 
 		console.log(data);
 
-		Axios.post('http://localhost:3000/addAppointment', data, {
+		Axios.post('process.env.REACT_APP_SERVER_URL/addAppointment', data, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
