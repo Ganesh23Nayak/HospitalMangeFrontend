@@ -32,7 +32,7 @@ const AdminView = () => {
 	}, []);
 
 	const fetchDataFromDatabase = () => {
-		Axios.post('process.env.REACT_APP_SERVER_URL/getadmin')
+		Axios.post('http://localhost:3000/getadmin')
 			.then((response) => {
 				if (response.data) {
 					const formattedData = response.data.admins.map((administrator) => ({
@@ -59,7 +59,7 @@ const AdminView = () => {
 			console.log('Form Data:', data);
 
 			// Assuming you have a backend endpoint to handle the post request
-			Axios.post('process.env.REACT_APP_SERVER_URL/addUser', data, {
+			Axios.post('http://localhost:3000/addUser', data, {
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -108,7 +108,7 @@ const AdminView = () => {
 
 	const handleRemove = (email, index) => {
 		console.log(email, index);
-		Axios.delete(`process.env.REACT_APP_SERVER_URL/removeusr/${email}`)
+		Axios.delete(`http://localhost:3000/removeusr/${email}`)
 			.then((response) => {
 				if (response.data.success) {
 					alert('Admin removed successfully');

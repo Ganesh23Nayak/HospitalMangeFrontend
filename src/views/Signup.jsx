@@ -3,12 +3,12 @@ import Heading from '../components/Headings';
 import SignupLeft from '../components/SVG/SignupLeft';
 import SignupRight from '../components/SVG/SignupRight';
 import {useState} from 'react';
-import {toast} from 'react-toastify';
-import {toastEmitter} from '../configs/config';
 import ShowPassword from '../components/SVG/ShowPassword';
-import {ToastContainer} from 'react-toastify';
 import Axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+// import dotenv from 'dotenv';
+
+// dotenv.config();
 
 const Signup = () => {
 	const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Signup = () => {
 		// {notify()}
 		console.log('Form Data:', data);
 
-		Axios.post('process.env.REACT_APP_SERVER_URL/addUser', data, {
+		Axios.post('http://localhost:3000/addUser', data, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -74,7 +74,8 @@ const Signup = () => {
 
 		console.log('Form Data:', data);
 
-		Axios.post('process.env.REACT_APP_SERVER_URL/login', data, {
+		// console.log('evn variable', http://localhost:3000);
+		Axios.post(`http://localhost:3000/login`, data, {
 			headers: {
 				'Content-Type': 'application/json',
 			},

@@ -27,13 +27,18 @@ const ContactUs = () => {
 	};
 
 	return (
-		<section id='contact' className='pt-[120px] pb-20 overflow-hidden relative border-t border-white border-opacity-[.15] '>
+		<section
+			id='contact'
+			className='pt-[120px] pb-20 overflow-hidden relative border-t border-white border-opacity-[.15] '
+		>
 			<div className='container '>
 				<div className='mx-wrap gap-y-10 justify-center '>
 					<div className='w-full lg:w-8/12 px-4 shrink '>
 						<div className=' bg-screen shadow-contact  rounded-md p-11 sm:p-[55px] lg:p-11 xl:p-[55px] fadeInUp-hidden shrink'>
 							<div className='h-full '>
-								<h2 className='font-bold text-body text-2xl sm:text-3xl lg:text-2xl xl:text-3xl mb-3 text-center'>Contact Us</h2>
+								<h2 className='font-bold text-body text-2xl sm:text-3xl lg:text-2xl xl:text-3xl mb-3 text-center'>
+									Contact Us
+								</h2>
 								<p className='text-sub text-base font-medium mb-12 text-center '>
 									Our support team will get back to you ASAP via email.
 								</p>
@@ -41,9 +46,7 @@ const ContactUs = () => {
 									<div className='mx-wrap'>
 										<div className='w-full md:w-1/2 px-4'>
 											<div className='mb-8'>
-												<label htmlFor='name' className='block text-sm font-medium text-body mb-3'>
-													Your Name
-												</label>
+												<label className='block text-sm font-medium text-body mb-3'>Your Name</label>
 												<input
 													type='text'
 													name='name'
@@ -55,9 +58,7 @@ const ContactUs = () => {
 										</div>
 										<div className='w-full md:w-1/2 px-4'>
 											<div className='mb-8'>
-												<label htmlFor='email' className='block text-sm font-medium text-body mb-3'>
-													Your Email
-												</label>
+												<label className='block text-sm font-medium text-body mb-3'>Your Email</label>
 												<input
 													type='email'
 													name='email'
@@ -69,9 +70,7 @@ const ContactUs = () => {
 										</div>
 										<div className='w-full px-4'>
 											<div className='mb-8'>
-												<label htmlFor='message' className='block text-sm font-medium text-body mb-3'>
-													Your Message
-												</label>
+												<label className='block text-sm font-medium text-body mb-3'>Your Message</label>
 												<textarea
 													name='message'
 													rows={5}
