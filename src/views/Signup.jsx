@@ -10,6 +10,8 @@ import {ToastContainer} from 'react-toastify';
 import Axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
+const apiUrl = import.meta.env.REACT_APP_API_URL;
+
 const Signup = () => {
 	const navigate = useNavigate();
 	const [formType, setFormType] = useState('login');
@@ -34,7 +36,7 @@ const Signup = () => {
 		// {notify()}
 		console.log('Form Data:', data);
 
-		Axios.post('process.env.REACT_APP_SERVER_URL/addUser', data, {
+		Axios.post(`${import.meta.env.VITE_API_URL}/addUser`, data, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -73,8 +75,9 @@ const Signup = () => {
 		});
 
 		console.log('Form Data:', data);
+		console.log(import.meta.env.VITE_API_URL);
 
-		Axios.post('process.env.REACT_APP_SERVER_URL/login', data, {
+		Axios.post(`${import.meta.env.VITE_API_URL}/login`, data, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
